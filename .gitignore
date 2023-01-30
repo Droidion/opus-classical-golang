@@ -12,7 +12,7 @@
 *.out
 
 # Environment variables
-.env
+app.env
 
 # OS specific
 .DS_Store
