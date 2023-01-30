@@ -1,5 +1,7 @@
 # Opus Classic Golang version
 
+[![Build → Test](https://github.com/Droidion/opus-classical-golang/actions/workflows/build.yml/badge.svg)](https://github.com/Droidion/opus-classical-golang/actions/workflows/build.yml)
+
 # How to run
 
 Have the latest version of Golang installed.
