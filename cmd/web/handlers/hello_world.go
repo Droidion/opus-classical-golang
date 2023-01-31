@@ -3,5 +3,7 @@ package handlers
 import "github.com/gofiber/fiber/v2"
 
 func HandleHelloWorld(c *fiber.Ctx) error {
-	return c.SendString("Hello, World!")
+	return c.Render("index", fiber.Map{
+		"Title": "Hello, World!",
+	}, "layouts/main")
 }

@@ -7,6 +7,7 @@ import (
 	"github.com/gofiber/fiber/v2"
 	"github.com/gofiber/fiber/v2/middleware/cors"
 	"github.com/gofiber/fiber/v2/middleware/recover"
+	"github.com/gofiber/template/jet"
 	"github.com/rotisserie/eris"
 	"strconv"
 )
@@ -44,8 +45,12 @@ func (webserver *webserver) addMiddleware(repo models.ProvidesData) {
 
 // createWebserver creates new web server.
 func (app *application) createWebserver() {
+	engine := jet.New("./views", ".jet")
+
 	srv := &webserver{
-		fiber: fiber.New(),
+		fiber: fiber.New(fiber.Config{
+			Views: engine,
+		}),
 	}
 	srv.addMiddleware(app.repo)
 	srv.registerRoutes()
