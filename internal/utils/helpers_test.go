@@ -62,3 +62,10 @@ func TestFormatCatalogueName(t *testing.T) {
 	assert.Equal(t, "", FormatCatalogueName("BWV", 0, ""))
 	assert.Equal(t, "", FormatCatalogueName("", 0, ""))
 }
+
+func TestFormatWorkName(t *testing.T) {
+	assert.Equal(t, "Symphony No. 9&nbsp;<em>Great</em>", FormatWorkName("Symphony", 9, "Great"))
+	assert.Equal(t, "Symphony No. 9", FormatWorkName("Symphony", 9, ""))
+	assert.Equal(t, "Symphony&nbsp;<em>Great</em>", FormatWorkName("Symphony", 0, "Great"))
+	assert.Equal(t, "", FormatWorkName("", 9, "Great"))
+}

@@ -70,9 +70,17 @@ func FormatCatalogueName(catalogueName string, catalogueNumber int, cataloguePos
 	return fmt.Sprintf("%s %d%s", catalogueName, catalogueNumber, cataloguePostfix)
 }
 
+// FormatWorkName formats music work full name, like "Symphony No. 9 Great".
 func FormatWorkName(workTitle string, workNo int, workNickname string) string {
-	if workNickname == "" {
-		return fmt.Sprintf("%s No. %d", workTitle, workNo)
+	if workTitle == "" {
+		return ""
 	}
-	return fmt.Sprintf("%s No. %d&nbsp;<em>%s</em>", workTitle, workNo, workNickname)
+	workName := workTitle
+	if workNo > 0 {
+		workName = workName + fmt.Sprintf(" No. %d", workNo)
+	}
+	if len(workNickname) > 0 {
+		workName = workName + fmt.Sprintf("&nbsp;<em>%s</em>", workNickname)
+	}
+	return workName
 }
