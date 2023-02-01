@@ -1,8 +1,0 @@
-<h1>{{ Title }}</h1>
-
-{{ range Periods }}
-    <h2>{{.Name}}</h2>
-    {{ range .Composers }}
-        <div>{{.LastName}}</div>
-    {{ end }}
-{{ end }}

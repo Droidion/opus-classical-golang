@@ -1,0 +1,12 @@
+<h1>Composers</h1>
+{{ range Periods }}
+    <h2>{{.Name}}, {{.YearsLasted}}</h2>
+    <hr/>
+    <div class="card-list">
+        {{ range .Composers }}
+            <a href="/composer/{{.Slug}}">
+                {{include "./partials/composer_card"}}
+            </a>
+        {{ end }}
+    </div>
+{{ end }}

@@ -1,0 +1,11 @@
+<div class="card">
+    <div>
+        <span>{{.LastName}}, </span>
+        <span class="card__light-text">{{.FirstName}}</span>
+    </div>
+    <div class="card__subtitle">
+        <span>{{ .CountriesRendered }}</span>
+        <span class="vertical-separator"></span>
+        <span>{{.YearsLived}}</span>
+    </div>
+</div>

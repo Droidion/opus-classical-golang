@@ -33,7 +33,7 @@ func (webserver *webserver) registerRoutes() {
 	static := webserver.fiber.Group("/static", addCache)
 	static.Static("/", "./static")
 
-	webserver.fiber.Get("/", handlers.HandleHelloWorld)
+	webserver.fiber.Get("/", handlers.HandlePeriods)
 }
 
 // injectRepo is a middleware that inject database repository into all web handlers context.

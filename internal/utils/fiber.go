@@ -1,7 +1,6 @@
 package utils
 
 import (
-	"github.com/droidion/opus-classical-golang/internal/models"
 	"github.com/gofiber/fiber/v2"
 	"github.com/rotisserie/eris"
 	"reflect"
@@ -24,9 +23,4 @@ func GetLocal[T any](c *fiber.Ctx, key string) (T, error) {
 		return result, eris.New("Value in fiber context is of wrong type")
 	}
 	return result, nil
-}
-
-// GetRepo retrieves data repository from fiber handler context.
-func GetRepo(c *fiber.Ctx) (*models.Repo, error) {
-	return GetLocal[*models.Repo](c, "repo")
 }
