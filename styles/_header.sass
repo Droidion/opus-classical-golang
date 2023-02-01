@@ -1,0 +1,128 @@
+@use 'colors'
+@use 'mixins'
+
+.header
+  @include mixins.centered-flex()
+  @include mixins.block-width()
+  background-color: colors.$black-10
+  grid-area: header
+  height: 4rem
+  justify-content: space-between
+  top: 0
+  z-index: 1
+
+  @include mixins.mq('desktop')
+    background-color: white
+    height: 6rem
+    position: sticky
+
+.logo-link:hover
+  text-decoration: none
+
+.brand
+  @include mixins.centered-flex()
+
+  &__logo
+    height: 36px
+    width: 36px
+
+    @include mixins.mq('desktop')
+      height: 72px
+      width: 72px
+
+  &__title
+    margin-left: 0.5rem
+
+    @include mixins.mq('desktop')
+      margin-left: 1rem
+
+  &__name
+    font-family: Cambria, Georgia, Times, 'Times New Roman', serif
+    font-size: 1.1rem
+    line-height: 1.4rem
+    font-weight: 500
+
+    @include mixins.mq('desktop')
+      line-height: 2rem
+      font-size: 2rem
+
+  &__description
+    font-size: 0.7rem
+    line-height: 0.8rem
+
+    @include mixins.mq('desktop')
+      line-height: 1.4rem
+      font-size: 1rem
+
+.search-wrapper
+  position: fixed
+  top: 0
+  left: 0
+  right: 0
+  bottom: 0
+  backdrop-filter: blur(2px)
+  -webkit-backdrop-filter: blur(2px)
+  background: rgba(0, 0, 0, 0.35)
+
+.search-button
+  cursor: pointer
+
+  img
+    width: 18px
+    height: 18px
+
+    @include mixins.mq('desktop')
+      width: 24px
+      height: 24px
+
+.search
+  background: white
+  font-size: 1.1rem
+  position: absolute
+  top: 8rem
+  width: 20rem
+  left: calc(50% - 10rem)
+  border: colors.$black-80
+  border-radius: 4px
+  box-shadow: 0 0 0.6rem rgba(0, 0, 0, 0.4)
+
+  a:hover
+    text-decoration: none
+
+  &__result
+    border-radius: 2px
+    margin: 0 0.4rem 0.4rem 0.4rem
+    padding: 0 0.4rem
+
+    &_selected
+      background: colors.$black-10
+
+  &__field
+    appearance: none
+    -moz-appearance: none
+    -webkit-appearance: none
+    margin: 0.4rem
+    height: 2rem
+    padding: 1rem 0.4rem
+    border-radius: 2px
+    background: colors.$black-10
+    border: 0
+    width: calc(100% - 0.8rem)
+
+    &:focus
+      outline: none
+
+    &::placeholder
+      font-weight: 300
+
+.menu
+  @include mixins.centered-flex()
+  display: flex
+
+
+  &__item
+    margin: 0 0.5rem
+
+    @include mixins.mq('desktop')
+      margin: 0 1rem
+      

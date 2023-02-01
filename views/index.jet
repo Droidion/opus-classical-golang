@@ -1,5 +1,8 @@
-{{include "partials/header"}}
-
 <h1>{{ Title }}</h1>
 
-{{include "partials/footer"}}
+{{ range Periods }}
+    <h2>{{.Name}}</h2>
+    {{ range .Composers }}
+        <div>{{.LastName}}</div>
+    {{ end }}
+{{ end }}

@@ -6,7 +6,9 @@ import (
 	"github.com/droidion/opus-classical-golang/internal/utils"
 	"github.com/gofiber/fiber/v2"
 	"github.com/gofiber/fiber/v2/middleware/cors"
+	"github.com/gofiber/fiber/v2/middleware/logger"
 	"github.com/gofiber/fiber/v2/middleware/recover"
+	"github.com/gofiber/helmet/v2"
 	"github.com/gofiber/template/jet"
 	"github.com/rotisserie/eris"
 	"strconv"
@@ -22,6 +24,15 @@ type servesRoutes interface {
 }
 
 func (webserver *webserver) registerRoutes() {
+	webserver.fiber.Use(helmet.New())
+	webserver.fiber.Use(denyCache)
+	webserver.fiber.Use(addSecurity)
+	webserver.fiber.Use(recover.New())
+	webserver.fiber.Use(logger.New())
+
+	static := webserver.fiber.Group("/static", addCache)
+	static.Static("/", "./static")
+
 	webserver.fiber.Get("/", handlers.HandleHelloWorld)
 }
 

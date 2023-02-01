@@ -1,1 +1,8 @@
-<h2>Footer</h2>
+<footer>
+    <a title="Buy me a coffee" href="https://www.buymeacoffee.com/zunh">
+        <img alt="Buy me a coffee" class="buy-coffee-button" src="/static/img/bmc-button.svg"/>
+    </a>
+    <a title="Github repository" href="https://github.com/Droidion/opusclassical">
+        <img alt="Github repository logo" class="footer-logo" src="/static/img/github-logo.svg"/>
+    </a>
+</footer>

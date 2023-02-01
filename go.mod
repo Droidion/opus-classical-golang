@@ -3,12 +3,15 @@ module github.com/droidion/opus-classical-golang
 go 1.19
 
 require (
+	github.com/doug-martin/goqu/v9 v9.18.0
 	github.com/getsentry/sentry-go v0.17.0
 	github.com/gofiber/fiber/v2 v2.41.0
+	github.com/gofiber/template v1.7.4
 	github.com/jackc/pgx/v5 v5.2.0
 	github.com/rotisserie/eris v0.5.4
 	github.com/rs/zerolog v1.29.0
 	github.com/spf13/viper v1.15.0
+	github.com/stretchr/testify v1.8.1
 )
 
 require (
@@ -17,7 +20,7 @@ require (
 	github.com/andybalholm/brotli v1.0.4 // indirect
 	github.com/davecgh/go-spew v1.1.1 // indirect
 	github.com/fsnotify/fsnotify v1.6.0 // indirect
-	github.com/gofiber/template v1.7.4 // indirect
+	github.com/gofiber/helmet/v2 v2.2.23 // indirect
 	github.com/hashicorp/hcl v1.0.0 // indirect
 	github.com/jackc/pgpassfile v1.0.0 // indirect
 	github.com/jackc/pgservicefile v0.0.0-20200714003250-2b9c44734f2b // indirect
@@ -35,8 +38,6 @@ require (
 	github.com/spf13/cast v1.5.0 // indirect
 	github.com/spf13/jwalterweatherman v1.1.0 // indirect
 	github.com/spf13/pflag v1.0.5 // indirect
-	github.com/stretchr/objx v0.5.0 // indirect
-	github.com/stretchr/testify v1.8.1 // indirect
 	github.com/subosito/gotenv v1.4.2 // indirect
 	github.com/valyala/bytebufferpool v1.0.0 // indirect
 	github.com/valyala/fasthttp v1.43.0 // indirect

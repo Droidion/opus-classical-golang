@@ -1,0 +1,14 @@
+@use 'mixins'
+
+.main
+  @include mixins.block-width()
+  grid-area: main
+  overflow: auto
+
+.header-subtitle
+  margin-bottom: 1rem
+  text-align: center
+  width: 100%
+
+.disabled
+  opacity: 30%

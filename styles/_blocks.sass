@@ -1,0 +1,57 @@
+@use 'colors'
+@use 'mixins'
+
+.card-list
+  display: flex
+  flex-wrap: wrap
+  margin-bottom: 1rem
+
+.card
+  margin: 0 1.4rem 0.8rem 0
+
+  &.illustrated
+    display: flex
+    flex: 1
+    margin: 0.5rem 2rem 1.5rem 0
+    min-width: 100%
+
+    @include mixins.mq('desktop')
+      min-width: 450px
+
+  &__light-text
+    font-weight: 300
+
+  &__title
+    line-height: 1.2rem
+    margin-bottom: .4rem
+
+    span
+      em
+        font-weight: 300
+
+  &__subtitle, &__instrument
+    font-size: 0.8rem
+    font-weight: 300
+
+  &__streamers
+    @include mixins.centered-flex()
+    display: flex
+
+  &__streamer-el
+    margin: 0.5rem 0.5rem 0 0
+
+    img
+      width: 24px
+
+
+.cover
+  border: 1px solid colors.$black-20
+  float: left
+  height: 100px
+  margin-right: 1rem
+  width: 100px
+
+  @include mixins.mq('desktop')
+    height: 200px
+    margin-right: 1.5rem
+    width: 200px

@@ -1,0 +1,12 @@
+version: "3.8"
+services:
+  site:
+    build: .
+    networks:
+      - opusclassical-network
+    env_file: .env
+    ports:
+      - "8000:8000"
+networks:
+  opusclassical-network:
+    driver: bridge

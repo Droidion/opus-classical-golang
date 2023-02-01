@@ -1,1 +1,15 @@
-<h2>Header</h2>
+<header class="header">
+    <a class="logo-link" href="/">
+        <div class="brand">
+            <img alt="Opus Classical logo" class="brand__logo" width="72" height="72" src="/static/img/composers-logo.png"/>
+            <div class="brand__title">
+                <div class="brand__name">Opus Classical</div>
+                <div class="brand__description">Catalogue for streaming classical music</div>
+            </div>
+        </div>
+    </a>
+    <nav class="menu">
+        <div class="menu__item" id="searchBlock"></div>
+        <div class="menu__item"><a href="/about">About</a></div>
+    </nav>
+</header>
