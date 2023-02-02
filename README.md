@@ -12,6 +12,7 @@ Create `app.env` with appropriate environment variables:
 SERVER_PORT=8080
 SENTRY_DSN=
 DATABASE_CONNECTION_STRING=postgres://localhost:5432/opusclassical
+COVERS_URI=https://opusclassical.zunh.nl-ams1.upcloudobjects.com/
 ```
 
 Run app with `$ go run ./...`

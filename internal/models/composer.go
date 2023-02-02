@@ -2,6 +2,7 @@ package models
 
 import (
 	"github.com/droidion/opus-classical-golang/internal/utils"
+	"github.com/rotisserie/eris"
 	"strings"
 )
 
@@ -23,4 +24,14 @@ type Composer struct {
 func (c *Composer) Process() {
 	c.CountriesRendered = strings.Join(c.Countries, ", ")
 	c.YearsLived = utils.FormatYearsRangeString(c.YearBorn, c.YearDied)
+}
+
+func (repo *Repo) GetComposer(slug string) (*Composer, error) {
+	var composer *Composer
+	sql := "SELECT composer_by_slug($1) AS json"
+	composer, err := extractSql[*Composer](repo.Db, sql, slug)
+	if err != nil {
+		return nil, eris.Wrap(err, "Could not get composer from database.")
+	}
+	return composer, nil
 }

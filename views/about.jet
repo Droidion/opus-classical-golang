@@ -1,0 +1,17 @@
+<h1>About</h1>
+<p>Opus Classical is a curated catalogue of classical music composers, works and recordings.</p>
+<h2>How to use</h2>
+<ul>
+    <li>Choose a composer: not every composer in history, but not only the most famous ones.</li>
+    <li>Choose a work: not everything that was written, but not only the greatest hits.</li>
+    <li>Choose a recording among several well-respected and newer ones.</li>
+    <li>Click the icon for your streaming app to open the work you're examining.</li>
+</ul>
+<h2>Supported functionality</h2>
+<ul>
+    <li>Mobile and desktop web versions.</li>
+    <li>Direct links to Spotify and Apple Music.</li>
+    <li>Direct links tested on MacOS, Windows and iOS.</li>
+</ul>
+<h2>Support</h2>
+<p>Source code is available at <a href="https://github.com/Droidion/opusclassical">Github</a>. Create issues there. Or hit me up on <a href="https://twitter.com/droidion">Twitter</a>.</p>

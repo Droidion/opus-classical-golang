@@ -1,6 +1,9 @@
 package main
 
-import "github.com/gofiber/fiber/v2"
+import (
+	"github.com/getsentry/sentry-go"
+	"github.com/gofiber/fiber/v2"
+)
 
 // addCache middleware adds long caching response headers.
 func addCache(c *fiber.Ctx) error {
@@ -23,4 +26,23 @@ func addSecurity(c *fiber.Ctx) error {
 	// c.Set("Content-Security-Policy", app.cfg.Csp)
 	c.Set("Permissions-Policy", "microphone=(), camera=()")
 	return c.Next()
+}
+
+func (app *application) errorInterceptor(c *fiber.Ctx, err error) error {
+	code := fiber.StatusInternalServerError
+	if e, ok := err.(*fiber.Error); ok {
+		code = e.Code
+	}
+
+	if code == 404 {
+		app.logger.InfoError("errorHandler caught 404, doing redirect", err)
+		if c.Path() == "/" {
+			return c.Redirect("/", fiber.StatusSeeOther)
+		}
+		return c.Redirect("/404", fiber.StatusSeeOther)
+	}
+
+	app.logger.Error("errorInterceptor caught error", err)
+	sentry.CaptureException(err)
+	return c.Redirect("/error", fiber.StatusSeeOther)
 }

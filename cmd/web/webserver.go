@@ -1,7 +1,6 @@
 package main
 
 import (
-	"github.com/droidion/opus-classical-golang/cmd/web/handlers"
 	"github.com/droidion/opus-classical-golang/internal/models"
 	"github.com/droidion/opus-classical-golang/internal/utils"
 	"github.com/gofiber/fiber/v2"
@@ -33,7 +32,11 @@ func (webserver *webserver) registerRoutes() {
 	static := webserver.fiber.Group("/static", addCache)
 	static.Static("/", "./static")
 
-	webserver.fiber.Get("/", handlers.HandlePeriods)
+	webserver.fiber.Get("/404", Handle404)
+	webserver.fiber.Get("/error", HandleError)
+	webserver.fiber.Get("/about", HandleAbout)
+	webserver.fiber.Get("/composer/:slug", HandleComposer)
+	webserver.fiber.Get("/", HandlePeriods)
 }
 
 // injectRepo is a middleware that inject database repository into all web handlers context.
@@ -60,7 +63,9 @@ func (app *application) createWebserver() {
 
 	srv := &webserver{
 		fiber: fiber.New(fiber.Config{
-			Views: engine,
+			Views:        engine,
+			ViewsLayout:  "layouts/main",
+			ErrorHandler: app.errorInterceptor,
 		}),
 	}
 	srv.addMiddleware(app.repo)

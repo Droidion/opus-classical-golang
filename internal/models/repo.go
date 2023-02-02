@@ -17,10 +17,15 @@ type Repo struct {
 
 const PostgresName = "postgres"
 
-func extractSql[T any](db *pgxpool.Pool, sql string) (T, error) {
+func extractSql[T any](db *pgxpool.Pool, sql string, params ...any) (T, error) {
 	var result T
 	var rawJson string
-	err := db.QueryRow(context.Background(), sql).Scan(&rawJson)
+	var err error
+	if len(params) > 0 {
+		err = db.QueryRow(context.Background(), sql, params...).Scan(&rawJson)
+	} else {
+		err = db.QueryRow(context.Background(), sql).Scan(&rawJson)
+	}
 	if err != nil {
 		return result, eris.Wrap(err, "Could not get JSON data from database.")
 	}

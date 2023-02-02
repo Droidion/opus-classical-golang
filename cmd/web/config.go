@@ -10,6 +10,7 @@ type config struct {
 	ServerPort               int
 	SentryDsn                string
 	DatabaseConnectionString string
+	CoversUri                string
 }
 
 // initConfig reads, parses and returns application configuration.
@@ -24,6 +25,7 @@ func (app *application) initConfig() {
 		ServerPort:               viper.GetInt("SERVER_PORT"),
 		SentryDsn:                viper.GetString("SENTRY_DSN"),
 		DatabaseConnectionString: viper.GetString("DATABASE_CONNECTION_STRING"),
+		CoversUri:                viper.GetString("COVERS_URI"),
 	}
 	app.config = &config
 }

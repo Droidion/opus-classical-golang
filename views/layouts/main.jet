@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <title>Opus Classical</title>
+  <title>{{Title}} | Opus Classical</title>
   <meta charset="utf-8"/>
   <meta name="description" content="List of classical music composers grouped by periods."/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>

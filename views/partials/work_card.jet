@@ -1,0 +1,24 @@
+<div class="card">
+    <div>
+        <span>{{ .FullName }}</span>
+    </div>
+    {{ if .CatalogueNotation || .ComposePeriod || .AverageLengthFormatted }}
+        <div class="card__subtitle">
+            {{ if .CatalogueNotation }}
+                <span>{{.CatalogueNotation}}</span>
+                {{ if .ComposePeriod || .AverageLengthFormatted }}
+                    <span class="vertical-separator"></span>
+                {{ end }}
+            {{ end }}
+            {{ if .ComposePeriod }}
+                <span>{{ .ComposePeriod }}</span>
+                {{ if .AverageLengthFormatted }}
+                    <span class="vertical-separator"></span>
+                {{ end }}
+            {{ end }}
+            {{ if .AverageLengthFormatted }}
+                <span>{{ .AverageLengthFormatted }}</span>
+            {{ end }}
+        </div>
+    {{ end }}
+</div>
