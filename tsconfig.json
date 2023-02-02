@@ -1,12 +1,19 @@
 {
   "extends": "@tsconfig/svelte/tsconfig.json",
-
   "compilerOptions": {
     "strict": true,
     "moduleResolution": "Node",
-    "types": ["node", "svelte"]
+    "types": [
+      "node",
+      "svelte"
+    ]
   },
-
-  "include": ["frontend/scripts/**/*"],
-  "exclude": ["node_modules/*", "__sapper__/*", "static/*"],
+  "include": [
+    "scripts/**/*"
+  ],
+  "exclude": [
+    "node_modules/*",
+    "__sapper__/*",
+    "static/*"
+  ]
 }
