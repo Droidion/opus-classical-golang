@@ -5,7 +5,7 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "sass": "sass --style=compressed frontend/styles/site.sass static/bundle.css",
+    "sass": "sass --style=compressed styles/site.sass static/bundle.css",
     "build": "./esbuild.js"
   },
   "author": "",
@@ -16,7 +16,6 @@
     "@types/node": "^18.11.18",
     "esbuild": "^0.17.4",
     "esbuild-plugin-compress": "^1.0.1",
-    "esbuild-sass-plugin": "^2.4.5",
     "esbuild-svelte": "^0.7.3",
     "sass": "^1.57.1",
     "svelte": "^3.55.1",

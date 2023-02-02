@@ -4,11 +4,10 @@ import esbuild from "esbuild";
 import esbuildSvelte from "esbuild-svelte";
 import sveltePreprocess from "svelte-preprocess";
 import { compress } from 'esbuild-plugin-compress';
-import {sassPlugin} from 'esbuild-sass-plugin';
 
 esbuild
     .build({
-        entryPoints: ["scripts/main.ts", "styles/site.sass"],
+        entryPoints: ["scripts/main.ts"],
         mainFields: ["svelte", "browser", "module", "main"],
         bundle: true,
         outdir: "static",
@@ -20,8 +19,7 @@ esbuild
             }),
             compress({
                 outputDir: '',
-            }),
-            sassPlugin()
+            })
         ],
         logLevel: "info",
     })
