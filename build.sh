@@ -6,4 +6,6 @@ set -o errexit
 pnpm i
 pnpm run sass
 pnpm run build
+go mod download
+go build -v -o server ./cmd/web
 cargo build --release
