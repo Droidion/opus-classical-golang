@@ -1,0 +1,20 @@
+<div class="card illustrated">
+    <img class="cover" src="{{StaticAssetsUrl}}{{.CoverName}}" alt="Cover"/>
+    <div>
+        {{ range .Performers }}
+            {{ include "./performer" }}
+        {{ end }}
+        <div class="card__subtitle">
+            <span>{{.Label}}</span>
+            <span class="vertical-separator"></span>
+            <span>{{.RecordingPeriod}}</span>
+            <span class="vertical-separator"></span>
+            <span>{{.LengthFormatted}}</span>
+        </div>
+        <div class="card__streamers">
+            {{ range .Streamers }}
+                {{ include "./streamer" }}
+            {{ end }}
+        </div>
+    </div>
+</div>

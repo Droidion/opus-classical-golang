@@ -1,13 +1,13 @@
-<h1>{{ Work.FirstName }} {{ Work.LastName }}</h1>
+<h1>{{ Composer.FirstName }} {{ Composer.LastName }}</h1>
 <div class="header-subtitle">
-    <span>{{ Work.CountriesRendered }}</span>
+    <span>{{ Composer.CountriesRendered }}</span>
     <span class="vertical-separator"></span>
-    <span>{{ Work.YearsLived }}</span>
+    <span>{{ Composer.YearsLived }}</span>
     <span class="vertical-separator"></span>
-    <a href="{{ Work.WikipediaLink }}">Wikipedia</a>
-    {{ if Work.ImslpLink }}
+    <a href="{{ Composer.WikipediaLink }}">Wikipedia</a>
+    {{ if Composer.ImslpLink }}
         <span class="vertical-separator"></span>
-        <a href="{{ Work.ImslpLink }}">IMSLP</a>
+        <a href="{{ Composer.ImslpLink }}">IMSLP</a>
     {{ end }}
 </div>
 
@@ -16,7 +16,7 @@
     <hr/>
     <div class="card-list">
         {{ range .Works }}
-            <a href="/composer/{{ .Slug }}/work/{{ .Id }}">
+            <a href="/composer/{{ Composer.Slug }}/work/{{ .Id }}">
                 {{ include "./partials/work_card" }}
             </a>
         {{ end }}

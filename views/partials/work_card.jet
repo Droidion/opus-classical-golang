@@ -1,6 +1,6 @@
 <div class="card">
     <div>
-        <span>{{ .FullName }}</span>
+        <span>{{ .FullName | raw }}</span>
     </div>
     {{ if .CatalogueNotation || .ComposePeriod || .AverageLengthFormatted }}
         <div class="card__subtitle">

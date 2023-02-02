@@ -36,6 +36,8 @@ func (webserver *webserver) registerRoutes() {
 	webserver.fiber.Get("/error", HandleError)
 	webserver.fiber.Get("/about", HandleAbout)
 	webserver.fiber.Get("/composer/:slug", HandleComposer)
+	webserver.fiber.Get("/composer/:composer/work/:work", HandleWork)
+	webserver.fiber.Get("/api/search", HandleSearch)
 	webserver.fiber.Get("/", HandlePeriods)
 }
 
@@ -50,10 +52,21 @@ func injectRepo(repo models.ProvidesData) func(c *fiber.Ctx) error {
 	return foo
 }
 
+func injectConfig(cfg *config) func(c *fiber.Ctx) error {
+	foo := func(c *fiber.Ctx) error {
+		utils.SetLocal[*config](c, "config", cfg)
+		c.Locals("config", cfg)
+		return c.Next()
+	}
+
+	return foo
+}
+
 // addMiddleware registers all middlewares for a fiber webserver.
-func (webserver *webserver) addMiddleware(repo models.ProvidesData) {
+func (webserver *webserver) addMiddleware(repo models.ProvidesData, config *config) {
 	webserver.fiber.Use(recover.New())
 	webserver.fiber.Use(injectRepo(repo))
+	webserver.fiber.Use(injectConfig(config))
 	webserver.fiber.Use(cors.New())
 }
 
@@ -68,7 +81,7 @@ func (app *application) createWebserver() {
 			ErrorHandler: app.errorInterceptor,
 		}),
 	}
-	srv.addMiddleware(app.repo)
+	srv.addMiddleware(app.repo, app.config)
 	srv.registerRoutes()
 	app.webserver = srv
 }

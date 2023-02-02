@@ -1,0 +1,23 @@
+<h1>{{Work.FullName | raw}}{{ if Work.CatalogueNotation }}, {{Work.CatalogueNotation}}{{ end }}</h1>
+<div class="header-subtitle">
+    <a href="/composer/{{Composer.Slug}}">{{Composer.FirstName}} {{Composer.LastName}}</a>{{ if Work.ComposePeriod }}
+<span>, {{Work.ComposePeriod}}</span>{{ end }}
+</div>
+
+{{ if len(ChildWorks) > 0 }}
+    <h2>Individual Works</h2>
+    <hr/>
+    <div class="card-list">
+        {{ range ChildWorks }}
+            {{ include "./partials/work_card" }}
+        {{ end }}
+    </div>
+{{ end }}
+
+<h2>Recommended Recordings</h2>
+<hr/>
+<div class="card-list full-width">
+    {{ range Recordings }}
+        {{ include "./partials/recording_card" }}
+    {{ end }}
+</div>

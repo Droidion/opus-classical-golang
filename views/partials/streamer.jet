@@ -1,0 +1,5 @@
+<div class="card__streamer-el">
+    <a href="{{.Prefix}}{{.Link}}">
+        <img src="/static/img/{{.Icon}}" height="24" width="24" alt="Streaming service logo"/>
+    </a>
+</div>

@@ -1,0 +1,4 @@
+<div class="card__title">
+    <span>{{.FirstName}} {{.LastName}} </span>
+    <span class="card__instrument">{{.Instrument}}</span>
+</div>
