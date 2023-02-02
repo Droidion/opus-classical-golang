@@ -8,7 +8,7 @@ import {sassPlugin} from 'esbuild-sass-plugin';
 
 esbuild
     .build({
-        entryPoints: ["frontend/scripts/main.ts", "frontend/styles/site.sass"],
+        entryPoints: ["scripts/main.ts", "styles/site.sass"],
         mainFields: ["svelte", "browser", "module", "main"],
         bundle: true,
         outdir: "static",
