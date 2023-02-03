@@ -1,7 +1,6 @@
 <h1>{{Work.FullName | raw}}{{ if Work.CatalogueNotation }}, {{Work.CatalogueNotation}}{{ end }}</h1>
 <div class="header-subtitle">
-    <a href="/composer/{{Composer.Slug}}">{{Composer.FirstName}} {{Composer.LastName}}</a>{{ if Work.ComposePeriod }}
-<span>, {{Work.ComposePeriod}}</span>{{ end }}
+    <a href="/composer/{{Composer.Slug}}">{{Composer.FirstName}} {{Composer.LastName}}</a>{{ if Work.ComposePeriod }}<span>, {{Work.ComposePeriod}}</span>{{ end }}
 </div>
 
 {{ if len(ChildWorks) > 0 }}

@@ -3,6 +3,7 @@ package main
 import (
 	"github.com/gofiber/fiber/v2"
 	"github.com/rotisserie/eris"
+	"strings"
 )
 
 func (app *application) Handle404(c *fiber.Ctx) error {
@@ -94,10 +95,12 @@ func (app *application) HandleWork(c *fiber.Ctx) error {
 		recordings[i].Process()
 	}
 
+	r := strings.NewReplacer("&nbsp;<em>", " ", "</em>", "")
+
 	return c.Render("work", fiber.Map{
 		"Shared":          app.sharedTemplateData,
 		"StaticAssetsUrl": app.config.CoversUri,
-		"Title":           work.FullName,
+		"Title":           r.Replace(work.FullName),
 		"Composer":        composer,
 		"Work":            work,
 		"ChildWorks":      childWorks,

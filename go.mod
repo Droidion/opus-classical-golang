@@ -3,7 +3,9 @@ module github.com/droidion/opus-classical-golang
 go 1.20
 
 require (
+	github.com/dchest/uniuri v1.2.0
 	github.com/doug-martin/goqu/v9 v9.18.0
+	github.com/georgysavva/scany/v2 v2.0.0
 	github.com/getsentry/sentry-go v0.17.0
 	github.com/gofiber/fiber/v2 v2.41.0
 	github.com/gofiber/helmet/v2 v2.2.23
@@ -20,16 +22,13 @@ require (
 	github.com/CloudyKit/jet/v6 v6.2.0 // indirect
 	github.com/andybalholm/brotli v1.0.4 // indirect
 	github.com/davecgh/go-spew v1.1.1 // indirect
-	github.com/dchest/uniuri v1.2.0 // indirect
 	github.com/fsnotify/fsnotify v1.6.0 // indirect
-	github.com/georgysavva/scany/v2 v2.0.0 // indirect
 	github.com/hashicorp/hcl v1.0.0 // indirect
-	github.com/jackc/pgio v1.0.0 // indirect
 	github.com/jackc/pgpassfile v1.0.0 // indirect
 	github.com/jackc/pgservicefile v0.0.0-20200714003250-2b9c44734f2b // indirect
-	github.com/jackc/pgtype v1.13.0 // indirect
 	github.com/jackc/puddle/v2 v2.1.2 // indirect
 	github.com/klauspost/compress v1.15.11 // indirect
+	github.com/lib/pq v1.10.2 // indirect
 	github.com/magiconair/properties v1.8.7 // indirect
 	github.com/mattn/go-colorable v0.1.13 // indirect
 	github.com/mattn/go-isatty v0.0.17 // indirect
