@@ -18,12 +18,12 @@ func denyCache(c *fiber.Ctx) error {
 }
 
 // addSecurity middleware adds security headers.
-func addSecurity(c *fiber.Ctx) error {
+func (app *application) addSecurity(c *fiber.Ctx) error {
 	c.Set("Strict-Transport-Security", "max-age=31536000; includeSubDomains")
 	c.Set("X-Permitted-Cross-Domain-Policies", "none")
 	c.Set("Referrer-Policy", "no-referrer")
 	c.Set("Cross-Origin-Opener-Policy", "same-origin")
-	// c.Set("Content-Security-Policy", app.cfg.Csp)
+	c.Set("Content-Security-Policy", app.config.Csp)
 	c.Set("Permissions-Policy", "microphone=(), camera=()")
 	return c.Next()
 }

@@ -1,38 +1,24 @@
 package main
 
 import (
-	"github.com/droidion/opus-classical-golang/internal/models"
-	"github.com/droidion/opus-classical-golang/internal/utils"
 	"github.com/gofiber/fiber/v2"
 	"github.com/rotisserie/eris"
 )
 
-func getRepo(c *fiber.Ctx) (*models.Repo, error) {
-	return utils.GetLocal[*models.Repo](c, "repo")
+func (app *application) Handle404(c *fiber.Ctx) error {
+	return c.Render("404", fiber.Map{"Title": "404", "Shared": app.sharedTemplateData})
 }
 
-func getConfig(c *fiber.Ctx) (*config, error) {
-	return utils.GetLocal[*config](c, "config")
+func (app *application) HandleError(c *fiber.Ctx) error {
+	return c.Render("error", fiber.Map{"Title": "Error", "Shared": app.sharedTemplateData})
 }
 
-func Handle404(c *fiber.Ctx) error {
-	return c.Render("404", fiber.Map{"Title": "404"})
+func (app *application) HandleAbout(c *fiber.Ctx) error {
+	return c.Render("about", fiber.Map{"Title": "About", "Shared": app.sharedTemplateData})
 }
 
-func HandleError(c *fiber.Ctx) error {
-	return c.Render("error", fiber.Map{"Title": "Error"})
-}
-
-func HandleAbout(c *fiber.Ctx) error {
-	return c.Render("about", fiber.Map{"Title": "About"})
-}
-
-func HandlePeriods(c *fiber.Ctx) error {
-	repo, err := getRepo(c)
-	if err != nil {
-		return eris.Wrap(err, "Could not get repo from endpoint handler")
-	}
-	periods, err := repo.GetPeriods()
+func (app *application) HandlePeriods(c *fiber.Ctx) error {
+	periods, err := app.repo.GetPeriods()
 	if err != nil {
 		return eris.Wrap(err, "Could not get periods from endpoint handler")
 	}
@@ -43,23 +29,20 @@ func HandlePeriods(c *fiber.Ctx) error {
 		}
 	}
 	return c.Render("periods", fiber.Map{
+		"Shared":  app.sharedTemplateData,
 		"Periods": periods,
 		"Title":   "Composers",
 	})
 }
 
-func HandleComposer(c *fiber.Ctx) error {
-	repo, err := getRepo(c)
-	if err != nil {
-		return eris.Wrap(err, "Could not get repo from endpoint handler")
-	}
+func (app *application) HandleComposer(c *fiber.Ctx) error {
 	slug := c.Params("slug")
-	composer, err := repo.GetComposer(slug)
+	composer, err := app.repo.GetComposer(slug)
 	if err != nil {
 		return eris.Wrap(err, "Could not get composer from endpoint handler")
 	}
 	composer.Process()
-	genres, err := repo.GetGenres(composer.Id)
+	genres, err := app.repo.GetGenres(composer.Id)
 	if err != nil {
 		return eris.Wrap(err, "Could not get genres from endpoint handler")
 	}
@@ -69,41 +52,33 @@ func HandleComposer(c *fiber.Ctx) error {
 		}
 	}
 	return c.Render("composer", fiber.Map{
+		"Shared":   app.sharedTemplateData,
 		"Title":    composer.LastName,
 		"Composer": composer,
 		"Genres":   genres,
 	})
 }
 
-func HandleWork(c *fiber.Ctx) error {
-	repo, err := getRepo(c)
-	if err != nil {
-		return eris.Wrap(err, "Could not get repo from endpoint handler")
-	}
-	config, err := getConfig(c)
-	if err != nil {
-		return eris.Wrap(err, "Could not get config from endpoint handler")
-	}
-
+func (app *application) HandleWork(c *fiber.Ctx) error {
 	composerSlug := c.Params("composer")
 	workId, err := c.ParamsInt("work")
 	if err != nil {
 		return eris.Wrap(err, "Could not parse work id")
 	}
 
-	work, err := repo.GetWork(workId)
+	work, err := app.repo.GetWork(workId)
 	if err != nil {
 		return eris.Wrap(err, "Could not get work from endpoint handler")
 	}
 	work.Process()
 
-	composer, err := repo.GetComposer(composerSlug)
+	composer, err := app.repo.GetComposer(composerSlug)
 	if err != nil {
 		return eris.Wrap(err, "Could not get composer from endpoint handler")
 	}
 	composer.Process()
 
-	childWorks, err := repo.GetChildWork(work.Id)
+	childWorks, err := app.repo.GetChildWork(work.Id)
 	if err != nil {
 		return eris.Wrap(err, "Could not get child works from endpoint handler")
 	}
@@ -111,7 +86,7 @@ func HandleWork(c *fiber.Ctx) error {
 		childWorks[i].Process()
 	}
 
-	recordings, err := repo.GetRecordings(work.Id)
+	recordings, err := app.repo.GetRecordings(work.Id)
 	if err != nil {
 		return eris.Wrap(err, "Could not get recordings from endpoint handler")
 	}
@@ -120,22 +95,19 @@ func HandleWork(c *fiber.Ctx) error {
 	}
 
 	return c.Render("work", fiber.Map{
+		"Shared":          app.sharedTemplateData,
+		"StaticAssetsUrl": app.config.CoversUri,
 		"Title":           work.FullName,
 		"Composer":        composer,
 		"Work":            work,
 		"ChildWorks":      childWorks,
 		"Recordings":      recordings,
-		"StaticAssetsUrl": config.CoversUri,
 	})
 }
 
-func HandleSearch(c *fiber.Ctx) error {
-	repo, err := getRepo(c)
-	if err != nil {
-		return eris.Wrap(err, "Could not get repo from endpoint handler")
-	}
+func (app *application) HandleSearch(c *fiber.Ctx) error {
 	query := c.Query("q")
-	composers, err := repo.SearchComposers(query, 5)
+	composers, err := app.repo.SearchComposers(query, 5)
 	if err != nil {
 		return eris.Wrap(err, "Could not get composer from endpoint handler")
 	}

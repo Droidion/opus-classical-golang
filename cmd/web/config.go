@@ -11,6 +11,9 @@ type config struct {
 	SentryDsn                string
 	DatabaseConnectionString string
 	CoversUri                string
+	Csp                      string
+	UmamiUri                 string
+	UmamiWebsiteId           string
 }
 
 // initConfig reads, parses and returns application configuration.
@@ -26,6 +29,9 @@ func (app *application) initConfig() {
 		SentryDsn:                viper.GetString("SENTRY_DSN"),
 		DatabaseConnectionString: viper.GetString("DATABASE_CONNECTION_STRING"),
 		CoversUri:                viper.GetString("COVERS_URI"),
+		Csp:                      viper.GetString("CSP"),
+		UmamiUri:                 viper.GetString("UMAMI_URI"),
+		UmamiWebsiteId:           viper.GetString("UMAMI_WEBSITE_ID"),
 	}
 	app.config = &config
 }

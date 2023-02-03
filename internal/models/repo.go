@@ -9,6 +9,12 @@ import (
 
 type ProvidesData interface {
 	GetPeriods() ([]*Period, error)
+	GetComposer(slug string) (*Composer, error)
+	GetGenres(composerId int) ([]*Genre, error)
+	GetRecordings(workId int) ([]*Recording, error)
+	SearchComposers(query string, limit int) ([]*SearchResult, error)
+	GetWork(id int) (*Work, error)
+	GetChildWork(parentWorkId int) ([]*Work, error)
 }
 
 type Repo struct {
