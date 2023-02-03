@@ -2,7 +2,6 @@ package main
 
 import (
 	"github.com/gofiber/fiber/v2"
-	"github.com/gofiber/fiber/v2/middleware/cors"
 	"github.com/gofiber/fiber/v2/middleware/recover"
 	"github.com/gofiber/helmet/v2"
 	"github.com/gofiber/template/jet"
@@ -34,7 +33,7 @@ func (app *application) createWebserver() {
 	f.Use(denyCache)
 	f.Use(app.addSecurity)
 	f.Use(recover.New())
-	f.Use(cors.New())
+	//f.Use(cors.New())
 
 	// Serve static assets
 	static := f.Group("/static", addCache)
