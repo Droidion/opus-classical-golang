@@ -6,28 +6,28 @@ import (
 )
 
 // IsValidYear checks if given string is a 4 digits number, like "1234" (not "-123", "123", or "12345").
-func IsValidYear(num int) bool {
+func IsValidYear(num int32) bool {
 	return num > 999 && num < 10_000
 }
 
 // SliceYear returns slice of the full year, like 85 from 1985.
-func SliceYear(year int) string {
-	return strconv.Itoa(year)[2:4]
+func SliceYear(year int32) string {
+	return strconv.FormatInt(int64(year), 10)[2:4]
 }
 
 // CenturyEqual checks if two given years are of the same century, like 1320 and 1399.
-func CenturyEqual(year1 int, year2 int) bool {
+func CenturyEqual(year1 int32, year2 int32) bool {
 	if !IsValidYear(year1) || !IsValidYear(year2) {
 		return false
 	}
-	getCentury := func(year int) string { return strconv.Itoa(year)[0:2] }
+	getCentury := func(year int32) string { return strconv.FormatInt(int64(year), 10)[0:2] }
 	return getCentury(year1) == getCentury(year2)
 }
 
 // FormatYearsRangeString formats the range of two years into the string, e.g. "1720–95", or "1720–1805", or "1720–".
 // Start year and dash are always present.
 // It's supposed to be used for lifespans, meaning we always have birth, but may not have death.
-func FormatYearsRangeString(startYear int, finishYear int) string {
+func FormatYearsRangeString(startYear int32, finishYear int32) string {
 	if !IsValidYear(startYear) && !IsValidYear(finishYear) {
 		return ""
 	}
@@ -44,7 +44,7 @@ func FormatYearsRangeString(startYear int, finishYear int) string {
 }
 
 // FormatWorkLength formats minutes into a string with hours and minutes, like "2h 35m"
-func FormatWorkLength(lengthInMinutes int) string {
+func FormatWorkLength(lengthInMinutes int32) string {
 	hours := lengthInMinutes / 60
 	minutes := lengthInMinutes % 60
 	if hours == 0 && minutes == 0 {
@@ -63,7 +63,7 @@ func FormatWorkLength(lengthInMinutes int) string {
 }
 
 // FormatCatalogueName formats catalogue name of the musical work, like "BWV 12p".
-func FormatCatalogueName(catalogueName string, catalogueNumber int, cataloguePostfix string) string {
+func FormatCatalogueName(catalogueName string, catalogueNumber int32, cataloguePostfix string) string {
 	if catalogueName == "" || catalogueNumber == 0 {
 		return ""
 	}
@@ -71,7 +71,7 @@ func FormatCatalogueName(catalogueName string, catalogueNumber int, cataloguePos
 }
 
 // FormatWorkName formats music work full name, like "Symphony No. 9 Great".
-func FormatWorkName(workTitle string, workNo int, workNickname string) string {
+func FormatWorkName(workTitle string, workNo int32, workNickname string) string {
 	if workTitle == "" {
 		return ""
 	}

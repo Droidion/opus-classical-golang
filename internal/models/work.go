@@ -4,47 +4,48 @@ import (
 	"context"
 	"github.com/droidion/opus-classical-golang/internal/utils"
 	"github.com/georgysavva/scany/v2/pgxscan"
+	"github.com/jackc/pgx/v5/pgtype"
 	"github.com/rotisserie/eris"
 )
 
 type Work struct {
-	Id                     int    `json:"id" db:"id"`
-	Title                  string `json:"title" db:"title"`
-	YearStart              int    `json:"yearStart" db:"year_start"`
-	YearFinish             int    `json:"yearFinish" db:"year_finish"`
+	Id                     int         `json:"id" db:"id"`
+	Title                  string      `json:"title" db:"title"`
+	YearStart              pgtype.Int4 `json:"yearStart" db:"year_start"`
+	YearFinish             pgtype.Int4 `json:"yearFinish" db:"year_finish"`
 	ComposePeriod          string
-	AverageMinutes         int `json:"averageMinutes" db:"average_minutes"`
+	AverageMinutes         pgtype.Int4 `json:"averageMinutes" db:"average_minutes"`
 	AverageLengthFormatted string
-	CatalogueName          string `json:"catalogueName" db:"catalogue_name"`
-	CatalogueNumber        int    `json:"catalogueNumber" db:"catalogue_number"`
-	CataloguePostfix       string `json:"cataloguePostfix" db:"catalogue_postfix"`
+	CatalogueName          pgtype.Text `json:"catalogueName" db:"catalogue_name"`
+	CatalogueNumber        pgtype.Int4 `json:"catalogueNumber" db:"catalogue_number"`
+	CataloguePostfix       pgtype.Text `json:"cataloguePostfix" db:"catalogue_postfix"`
 	CatalogueNotation      string
 	FullName               string
-	Key                    string `json:"key" db:"key"`
-	No                     int    `json:"no" db:"no"`
-	Nickname               string `json:"nickname" db:"nickname"`
+	Key                    pgtype.Text `json:"key" db:"key"`
+	No                     pgtype.Int4 `json:"no" db:"no"`
+	Nickname               pgtype.Text `json:"nickname" db:"nickname"`
 }
 
 func (w *Work) Process() {
-	w.FullName = utils.FormatWorkName(w.Title, w.No, w.Nickname)
-	w.CatalogueNotation = utils.FormatCatalogueName(w.CatalogueName, w.CatalogueNumber, w.CataloguePostfix)
-	w.ComposePeriod = utils.FormatYearsRangeString(w.YearStart, w.YearFinish)
-	w.AverageLengthFormatted = utils.FormatWorkLength(w.AverageMinutes)
+	w.FullName = utils.FormatWorkName(w.Title, w.No.Int32, w.Nickname.String)
+	w.CatalogueNotation = utils.FormatCatalogueName(w.CatalogueName.String, w.CatalogueNumber.Int32, w.CataloguePostfix.String)
+	w.ComposePeriod = utils.FormatYearsRangeString(w.YearStart.Int32, w.YearFinish.Int32)
+	w.AverageLengthFormatted = utils.FormatWorkLength(w.AverageMinutes.Int32)
 }
 
 func (repo *Repo) GetWork(id int) (*Work, error) {
 	var works []*Work
 	sql := `select w.id,
            w.title,
-           COALESCE(w.year_start, 0) as year_start,
-           COALESCE(w.year_finish, 0) as year_finish,
-           COALESCE(w.average_minutes, 0) as average_minutes,
-           COALESCE(c.name, '') as catalogue_name,
-           COALESCE(w.catalogue_number, 0) as catalogue_number,
-           COALESCE(w.catalogue_postfix, '') as catalogue_postfix,
-           COALESCE(k.name, '') as key,
-           COALESCE(w.no, 0) as no,
-           COALESCE(w.nickname, '') as nickname
+           w.year_start,
+           w.year_finish,
+           w.average_minutes,
+           c.name as catalogue_name,
+           w.catalogue_number,
+           w.catalogue_postfix,
+           k.name as key,
+           w.no,
+           w.nickname
     from works w
              left join catalogues c on w.catalogue_id = c.id
              left join keys k on w.key_id = k.id
@@ -60,15 +61,15 @@ func (repo *Repo) GetChildWork(parentWorkId int) ([]*Work, error) {
 	var works []*Work
 	sql := `select w.id,
            w.title,
-           COALESCE(w.year_start, 0) as year_start,
-           COALESCE(w.year_finish, 0) as year_finish,
-           COALESCE(w.average_minutes, 0) as average_minutes,
-           COALESCE(c.name, '') as catalogue_name,
-           COALESCE(w.catalogue_number, 0) as catalogue_number,
-           COALESCE(w.catalogue_postfix, '') as catalogue_postfix,
-           COALESCE(k.name, '') as key,
-           COALESCE(w.no, 0) as no,
-           COALESCE(w.nickname, '') as nickname
+           w.year_start,
+           w.year_finish,
+           w.average_minutes,
+           c.name as catalogue_name,
+           w.catalogue_number,
+           w.catalogue_postfix,
+           k.name as key,
+           w.no,
+           w.nickname
     from works w
              left join catalogues c on w.catalogue_id = c.id
              left join keys k on w.key_id = k.id

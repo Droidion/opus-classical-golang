@@ -2,25 +2,26 @@ package models
 
 import (
 	"github.com/droidion/opus-classical-golang/internal/utils"
+	"github.com/jackc/pgx/v5/pgtype"
 	"github.com/rotisserie/eris"
 )
 
 type Recording struct {
-	Id              int    `json:"int"`
-	Label           string `json:"label"`
-	Length          int    `json:"length"`
+	Id              int         `json:"int"`
+	Label           string      `json:"label"`
+	Length          pgtype.Int4 `json:"length"`
 	LengthFormatted string
 	CoverName       string      `json:"coverName"`
 	Streamers       []Streamer  `json:"streamers"`
-	YearStart       int         `json:"yearStart"`
+	YearStart       pgtype.Int4 `json:"yearStart"`
 	Performers      []Performer `json:"performers"`
-	YearFinish      int         `json:"yearFinish"`
+	YearFinish      pgtype.Int4 `json:"yearFinish"`
 	RecordingPeriod string
 }
 
 func (r *Recording) Process() {
-	r.LengthFormatted = utils.FormatWorkLength(r.Length)
-	r.RecordingPeriod = utils.FormatYearsRangeString(r.YearStart, r.YearFinish)
+	r.LengthFormatted = utils.FormatWorkLength(r.Length.Int32)
+	r.RecordingPeriod = utils.FormatYearsRangeString(r.YearStart.Int32, r.YearFinish.Int32)
 }
 
 func (repo *Repo) GetRecordings(workId int) ([]*Recording, error) {

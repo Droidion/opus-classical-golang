@@ -3,15 +3,16 @@ package models
 import (
 	"context"
 	"github.com/georgysavva/scany/v2/pgxscan"
+	"github.com/jackc/pgx/v5/pgtype"
 	"github.com/rotisserie/eris"
 )
 
 type SearchResult struct {
-	Id            int     `json:"id" db:"id"`
-	FirstName     string  `json:"firstName" db:"first_name"`
-	LastName      string  `json:"lastName" db:"last_name"`
-	Slug          string  `json:"slug" db:"slug"`
-	LastNameScore float64 `json:"lastNameScore" db:"last_name_score"`
+	Id            int           `json:"id" db:"id"`
+	FirstName     pgtype.Text   `json:"firstName" db:"first_name"`
+	LastName      pgtype.Text   `json:"lastName" db:"last_name"`
+	Slug          pgtype.Text   `json:"slug" db:"slug"`
+	LastNameScore pgtype.Float8 `json:"lastNameScore" db:"last_name_score"`
 }
 
 func (repo *Repo) SearchComposers(query string, limit int) ([]*SearchResult, error) {

@@ -2,28 +2,29 @@ package models
 
 import (
 	"github.com/droidion/opus-classical-golang/internal/utils"
+	"github.com/jackc/pgx/v5/pgtype"
 	"github.com/rotisserie/eris"
 	"strings"
 )
 
 type Composer struct {
-	Id                int    `json:"id"`
-	LastName          string `json:"lastName"`
-	FirstName         string `json:"firstName"`
-	YearBorn          int    `json:"yearBorn"`
-	YearDied          int    `json:"yearDied"`
+	Id                int         `json:"id"`
+	LastName          string      `json:"lastName"`
+	FirstName         string      `json:"firstName"`
+	YearBorn          pgtype.Int4 `json:"yearBorn"`
+	YearDied          pgtype.Int4 `json:"yearDied"`
 	YearsLived        string
 	Countries         []string `json:"countries"`
 	CountriesRendered string
-	Slug              string `json:"slug"`
-	Enabled           bool   `json:"enabled"`
-	WikipediaLink     string `json:"wikipediaLink"`
-	ImslpLink         string `json:"imslpLink"`
+	Slug              string      `json:"slug"`
+	Enabled           pgtype.Bool `json:"enabled"`
+	WikipediaLink     pgtype.Text `json:"wikipediaLink"`
+	ImslpLink         pgtype.Text `json:"imslpLink"`
 }
 
 func (c *Composer) Process() {
 	c.CountriesRendered = strings.Join(c.Countries, ", ")
-	c.YearsLived = utils.FormatYearsRangeString(c.YearBorn, c.YearDied)
+	c.YearsLived = utils.FormatYearsRangeString(c.YearBorn.Int32, c.YearDied.Int32)
 }
 
 func (repo *Repo) GetComposer(slug string) (*Composer, error) {

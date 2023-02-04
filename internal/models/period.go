@@ -3,24 +3,25 @@ package models
 import (
 	"fmt"
 	"github.com/doug-martin/goqu/v9"
+	"github.com/jackc/pgx/v5/pgtype"
 	"github.com/rotisserie/eris"
 )
 
 // Period represents musical period, like Baroque or Romanticism.
 type Period struct {
-	Id          int    `json:"id"`
-	Name        string `json:"name"`
-	YearStart   int    `json:"yearStart"`
-	YearEnd     int    `json:"yearEnd"`
+	Id          int         `json:"id"`
+	Name        string      `json:"name"`
+	YearStart   pgtype.Int4 `json:"yearStart"`
+	YearEnd     pgtype.Int4 `json:"yearEnd"`
 	YearsLasted string
-	Slug        string     `json:"slug"`
-	Composers   []Composer `json:"composers"`
+	Slug        pgtype.Text `json:"slug"`
+	Composers   []Composer  `json:"composers"`
 }
 
 func (p *Period) Process() {
-	p.YearsLasted = fmt.Sprintf("%d–", p.YearStart)
-	if p.YearEnd > 0 {
-		p.YearsLasted = p.YearsLasted + fmt.Sprintf("%d", p.YearEnd)
+	p.YearsLasted = fmt.Sprintf("%d–", p.YearStart.Int32)
+	if p.YearEnd.Int32 > 0 {
+		p.YearsLasted = p.YearsLasted + fmt.Sprintf("%d", p.YearEnd.Int32)
 	}
 }
 
