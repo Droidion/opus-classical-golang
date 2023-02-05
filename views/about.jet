@@ -10,8 +10,8 @@
 <h2>Supported functionality</h2>
 <ul>
     <li>Mobile and desktop web versions.</li>
-    <li>Direct links to Spotify and Apple Music.</li>
+    <li>Direct links to Spotify and Qobuz.</li>
     <li>Direct links tested on MacOS, Windows and iOS.</li>
 </ul>
 <h2>Support</h2>
-<p>Source code is available at <a href="https://github.com/Droidion/opusclassical">Github</a>. Create issues there. Or hit me up on <a href="https://twitter.com/droidion">Twitter</a>.</p>
+<p>Source code is available at <a href="https://github.com/Droidion/opus-classical-golang">Github</a>. Create issues there. Or hit me up on <a href="https://twitter.com/droidion">Twitter</a>.</p>
