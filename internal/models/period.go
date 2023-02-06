@@ -19,7 +19,7 @@ type Period struct {
 
 func (p *Period) Process() {
 	p.YearsLasted = fmt.Sprintf("%d–", p.YearStart.Int32)
-	if p.YearEnd.Int32 > 0 {
+	if p.YearEnd.Valid {
 		p.YearsLasted = p.YearsLasted + fmt.Sprintf("%d", p.YearEnd.Int32)
 	}
 }

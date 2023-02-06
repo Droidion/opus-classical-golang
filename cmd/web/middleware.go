@@ -7,24 +7,24 @@ import (
 
 // addCache middleware adds long caching response headers.
 func addCache(c *fiber.Ctx) error {
-	c.Set("Cache-Control", "max-age=31536000, immutable")
+	c.Set(fiber.HeaderCacheControl, "max-age=31536000, immutable")
 	return c.Next()
 }
 
 // denyCache middleware adds caching response header with no cache directive.
 func denyCache(c *fiber.Ctx) error {
-	c.Set("Cache-Control", "private, max-age=0")
+	c.Set(fiber.HeaderCacheControl, "private, max-age=0")
 	return c.Next()
 }
 
 // addSecurity middleware adds security headers.
 func (app *application) addSecurity(c *fiber.Ctx) error {
-	c.Set("Strict-Transport-Security", "max-age=31536000; includeSubDomains")
-	c.Set("X-Permitted-Cross-Domain-Policies", "none")
-	c.Set("Referrer-Policy", "no-referrer")
+	c.Set(fiber.HeaderStrictTransportSecurity, "max-age=31536000; includeSubDomains")
+	c.Set(fiber.HeaderXPermittedCrossDomainPolicies, "none")
+	c.Set(fiber.HeaderReferrerPolicy, "no-referrer")
 	c.Set("Cross-Origin-Opener-Policy", "same-origin")
-	c.Set("Content-Security-Policy", app.config.Csp)
-	c.Set("Permissions-Policy", "microphone=(), camera=()")
+	c.Set(fiber.HeaderContentSecurityPolicy, app.config.Csp)
+	c.Set(fiber.HeaderPermissionsPolicy, "microphone=(), camera=()")
 	return c.Next()
 }
 

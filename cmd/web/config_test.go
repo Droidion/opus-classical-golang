@@ -7,8 +7,6 @@ import (
 
 func TestInitConfig(t *testing.T) {
 	app := &application{}
-
 	app.initConfig()
-
 	assert.NotNil(t, app.config)
 }

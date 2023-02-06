@@ -40,13 +40,13 @@ func (app *application) createWebserver() {
 	static.Static("/", "./static")
 
 	// Serve dynamic page
-	f.Get("/404", app.Handle404)
-	f.Get("/error", app.HandleError)
-	f.Get("/about", app.HandleAbout)
-	f.Get("/composer/:slug", app.HandleComposer)
-	f.Get("/composer/:composer/work/:work", app.HandleWork)
-	f.Get("/api/search", app.HandleSearch)
-	f.Get("/", app.HandlePeriods)
+	f.Get("/404", app.handle404)
+	f.Get("/error", app.handleError)
+	f.Get("/about", app.handleAbout)
+	f.Get("/composer/:slug", app.handleComposer)
+	f.Get("/composer/:composer/work/:work", app.handleWork)
+	f.Get("/api/search", app.handleSearch)
+	f.Get("/", app.handlePeriods)
 
 	app.webserver = &webserver{
 		fiber: f,

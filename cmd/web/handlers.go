@@ -6,19 +6,19 @@ import (
 	"strings"
 )
 
-func (app *application) Handle404(c *fiber.Ctx) error {
+func (app *application) handle404(c *fiber.Ctx) error {
 	return c.Render("404", fiber.Map{"Title": "404", "Shared": app.sharedTemplateData})
 }
 
-func (app *application) HandleError(c *fiber.Ctx) error {
+func (app *application) handleError(c *fiber.Ctx) error {
 	return c.Render("error", fiber.Map{"Title": "Error", "Shared": app.sharedTemplateData})
 }
 
-func (app *application) HandleAbout(c *fiber.Ctx) error {
+func (app *application) handleAbout(c *fiber.Ctx) error {
 	return c.Render("about", fiber.Map{"Title": "About", "Shared": app.sharedTemplateData})
 }
 
-func (app *application) HandlePeriods(c *fiber.Ctx) error {
+func (app *application) handlePeriods(c *fiber.Ctx) error {
 	periods, err := app.repo.GetPeriods()
 	if err != nil {
 		return eris.Wrap(err, "Could not get periods from endpoint handler")
@@ -36,7 +36,7 @@ func (app *application) HandlePeriods(c *fiber.Ctx) error {
 	})
 }
 
-func (app *application) HandleComposer(c *fiber.Ctx) error {
+func (app *application) handleComposer(c *fiber.Ctx) error {
 	slug := c.Params("slug")
 	composer, err := app.repo.GetComposer(slug)
 	if err != nil {
@@ -60,7 +60,7 @@ func (app *application) HandleComposer(c *fiber.Ctx) error {
 	})
 }
 
-func (app *application) HandleWork(c *fiber.Ctx) error {
+func (app *application) handleWork(c *fiber.Ctx) error {
 	composerSlug := c.Params("composer")
 	workId, err := c.ParamsInt("work")
 	if err != nil {
@@ -108,7 +108,7 @@ func (app *application) HandleWork(c *fiber.Ctx) error {
 	})
 }
 
-func (app *application) HandleSearch(c *fiber.Ctx) error {
+func (app *application) handleSearch(c *fiber.Ctx) error {
 	query := c.Query("q")
 	composers, err := app.repo.SearchComposers(query, 5)
 	if err != nil {
