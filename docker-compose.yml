@@ -4,9 +4,9 @@ services:
     build: .
     networks:
       - opusclassical-network
-    env_file: .env
+    env_file: app.env
     ports:
-      - "8000:8000"
+      - "8080:8080"
 networks:
   opusclassical-network:
     driver: bridge
