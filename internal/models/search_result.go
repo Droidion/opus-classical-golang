@@ -26,12 +26,12 @@ func (repo *Repo) SearchComposers(query string, limit int) ([]*SearchResult, err
 		Select("id", "first_name", "last_name", "slug", "last_name_score").
 		ToSQL()
 	if err != nil {
-		return nil, eris.Wrap(err, "construct goqu request")
+		return nil, eris.Wrapf(err, "Failed to construct SQL query with goqu for getting search results with query %s and limit %d", query, limit)
 	}
 
 	err = pgxscan.Select(context.Background(), repo.Db, &results, sql)
 	if err != nil {
-		return results, eris.Wrap(err, "pgxscan.Select")
+		return results, eris.Wrapf(err, "Failed to map search results to Go struct with query %s and limit %d", query, limit)
 	}
 	return results, nil
 }

@@ -36,11 +36,11 @@ func extractSql[T any](db *pgxpool.Pool, sql string, params ...any) (T, error) {
 		err = db.QueryRow(context.Background(), sql).Scan(&rawJson)
 	}
 	if err != nil {
-		return result, eris.Wrap(err, "db.QueryRow")
+		return result, eris.Wrap(err, "Failed to query row with pgx")
 	}
 	err = json.Unmarshal([]byte(rawJson), &result)
 	if err != nil {
-		return result, eris.Wrap(err, "json.Unmarshal")
+		return result, eris.Wrapf(err, "Failed to unmarshal JSON %s", rawJson)
 	}
 	return result, nil
 }

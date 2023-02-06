@@ -36,12 +36,12 @@ func (repo *Repo) GetComposer(slug string) (*Composer, error) {
 
 	sql, _, err := dialect.Select(goqu.Func("composer_by_slug", slug).As("json")).ToSQL()
 	if err != nil {
-		return nil, eris.Wrap(err, "construct goqu request")
+		return nil, eris.Wrapf(err, "Failed to construct SQL query with goqu for getting composer with slug %s", slug)
 	}
 
 	composer, err = extractSql[*Composer](repo.Db, sql)
 	if err != nil {
-		return nil, eris.Wrap(err, "extractSql")
+		return nil, eris.Wrapf(err, "Failed to parse JSON for composer with slug %s ", slug)
 	}
 	return composer, nil
 }

@@ -26,7 +26,7 @@ func main() {
 	app.sharedTemplateData.appRunId = uniuri.New()
 	app.sharedTemplateData.umamiUri = app.config.UmamiUri
 	app.sharedTemplateData.umamiWebsiteId = app.config.UmamiWebsiteId
-	app.logger = newLogger()
+	app.newLogger()
 	db := app.initDb()
 	defer db.Close()
 	app.repo = &models.Repo{Db: db}

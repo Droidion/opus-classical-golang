@@ -35,13 +35,13 @@ func (app *application) errorInterceptor(c *fiber.Ctx, err error) error {
 	}
 
 	if code == 404 {
-		app.logger.InfoError("errorInterceptor 404", err)
+		app.logger.InfoError("Failed to process HTTP request with error code 404", err)
 		if c.Path() == "/" {
 			return c.Redirect("/", fiber.StatusSeeOther)
 		}
 		return c.Redirect("/404", fiber.StatusSeeOther)
 	}
 
-	app.logger.Error("errorInterceptor non 404", err)
+	app.logger.Error("Failed to process HTTP request with error code other than 404", err)
 	return c.Redirect("/error", fiber.StatusSeeOther)
 }

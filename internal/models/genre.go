@@ -18,12 +18,12 @@ func (repo *Repo) GetGenres(composerId int) ([]*Genre, error) {
 
 	sql, _, err := dialect.Select(goqu.Func("genres_and_works_by_composer", composerId).As("json")).ToSQL()
 	if err != nil {
-		return nil, eris.Wrap(err, "construct goqu request")
+		return nil, eris.Wrapf(err, "Failed to construct SQL query with goqu for getting genres with composer ID %d", composerId)
 	}
 
 	genres, err = extractSql[[]*Genre](repo.Db, sql)
 	if err != nil {
-		return genres, eris.Wrap(err, "extractSql")
+		return genres, eris.Wrapf(err, "Failed to parse JSON for composer with composer ID %d ", composerId)
 	}
 	return genres, nil
 }

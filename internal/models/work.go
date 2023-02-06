@@ -57,11 +57,11 @@ func (repo *Repo) GetWork(id int) (*Work, error) {
 	var works []*Work
 	sql, _, err := worksDataset.Where(goqu.Ex{"works.id": id}).ToSQL()
 	if err != nil {
-		return nil, eris.Wrap(err, "construct goqu request")
+		return nil, eris.Wrapf(err, "Failed to construct SQL query with goqu for getting work with work ID %d", id)
 	}
 	err = pgxscan.Select(context.Background(), repo.Db, &works, sql)
 	if err != nil || len(works) == 0 {
-		return nil, eris.Wrap(err, "pgxscan.Select")
+		return nil, eris.Wrapf(err, "Failed to map work to Go struct with work ID %d", id)
 	}
 	return works[0], nil
 }
@@ -82,12 +82,12 @@ func (repo *Repo) GetChildWorks(parentWorkId int) ([]*Work, error) {
 		).
 		ToSQL()
 	if err != nil {
-		return works, eris.Wrap(err, "construct goqu request")
+		return works, eris.Wrapf(err, "Failed to construct SQL query with goqu for getting children works with parent work ID %d", parentWorkId)
 	}
 
 	err = pgxscan.Select(context.Background(), repo.Db, &works, sql)
 	if err != nil {
-		return works, eris.Wrap(err, "pgxscan.Select")
+		return works, eris.Wrapf(err, "Failed to map children works to Go struct with parent work ID %d", parentWorkId)
 	}
 	return works, nil
 }

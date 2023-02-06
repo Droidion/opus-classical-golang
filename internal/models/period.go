@@ -33,11 +33,11 @@ func (repo *Repo) GetPeriods() ([]*Period, error) {
 		Select("json").
 		ToSQL()
 	if err != nil {
-		return periods, eris.Wrap(err, "goqu request")
+		return periods, eris.Wrap(err, "Failed to construct SQL query with goqu for getting periods")
 	}
 	periods, err = extractSql[[]*Period](repo.Db, sql)
 	if err != nil {
-		return periods, eris.Wrap(err, "extractSql")
+		return periods, eris.Wrap(err, "Failed to parse JSON for periods")
 	}
 	return periods, nil
 }

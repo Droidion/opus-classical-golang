@@ -31,6 +31,8 @@ CSP="default-src 'none'; manifest-src 'self'; connect-src 'self' https://analyti
 UMAMI_URI=
 # Website ID for submitting client-side statustics with Umami.
 UMAMI_WEBSITE_ID=
+# Is app run under development environment.
+IS_DEV=true
 ```
 
 Install packages:
@@ -50,6 +52,20 @@ Build and run Go server
 Alternatively, build everything with `$ ./build.sh` and run server with `$ ./server`.
 
 Alternatively, have Docker installed and run with `$ docker compose up`.
+
+# Update packages
+
+Look for new versions for:
+
+- `$ pnpm outdated`.
+- `$ go list -u -m -json all | go-mod-outdated -direct` (need [go-mod-outdated](https://github.com/psampaz/go-mod-outdated) installed).
+
+Update `package.json` and `go.mod` respectively.
+
+Download new versions:
+
+- `$ pnpm i`.
+- `$ go mod tidy`.
 
 # Run unit tests
 

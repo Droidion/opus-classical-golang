@@ -33,12 +33,12 @@ func (repo *Repo) GetRecordings(workId int) ([]*Recording, error) {
 
 	sql, _, err := dialect.Select(goqu.Func("recordings_by_work", workId).As("json")).ToSQL()
 	if err != nil {
-		return nil, eris.Wrap(err, "construct goqu request")
+		return nil, eris.Wrapf(err, "Failed to construct SQL query with goqu for getting recordings with work ID %d", workId)
 	}
 
 	recordings, err = extractSql[[]*Recording](repo.Db, sql)
 	if err != nil {
-		return recordings, eris.Wrap(err, "extractSql")
+		return recordings, eris.Wrapf(err, "Failed to parse JSON for recordings with work ID %d ", workId)
 	}
 	return recordings, nil
 }

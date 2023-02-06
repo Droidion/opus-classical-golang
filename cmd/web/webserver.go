@@ -57,7 +57,7 @@ func (app *application) createWebserver() {
 func (webserver *webserver) startServer(port int) error {
 	err := webserver.fiber.Listen(":" + strconv.Itoa(port))
 	if err != nil {
-		return eris.Wrap(err, "webserver.fiber.Listen")
+		return eris.Wrapf(err, "Failed to start web server on port %d", port)
 	}
 	return nil
 }
