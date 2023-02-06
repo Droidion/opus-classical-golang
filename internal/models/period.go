@@ -2,7 +2,6 @@ package models
 
 import (
 	"fmt"
-	"github.com/doug-martin/goqu/v9"
 	"github.com/jackc/pgx/v5/pgtype"
 	"github.com/rotisserie/eris"
 )
@@ -28,8 +27,7 @@ func (p *Period) Process() {
 // GetPeriods returns musical periods from database.
 func (repo *Repo) GetPeriods() ([]*Period, error) {
 	var periods []*Period
-	sql, _, err := goqu.
-		Dialect(PostgresName).
+	sql, _, err := dialect.
 		From("periods_composers").
 		Select("json").
 		ToSQL()

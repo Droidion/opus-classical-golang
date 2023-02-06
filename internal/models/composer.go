@@ -1,6 +1,7 @@
 package models
 
 import (
+	"github.com/doug-martin/goqu/v9"
 	"github.com/droidion/opus-classical-golang/internal/utils"
 	"github.com/jackc/pgx/v5/pgtype"
 	"github.com/rotisserie/eris"
@@ -29,8 +30,13 @@ func (c *Composer) Process() {
 
 func (repo *Repo) GetComposer(slug string) (*Composer, error) {
 	var composer *Composer
-	sql := "SELECT composer_by_slug($1) AS json"
-	composer, err := extractSql[*Composer](repo.Db, sql, slug)
+
+	sql, _, err := dialect.Select(goqu.Func("composer_by_slug", slug).As("json")).ToSQL()
+	if err != nil {
+		return nil, eris.Wrap(err, "Could not construct SQL request to get composer from database.")
+	}
+
+	composer, err = extractSql[*Composer](repo.Db, sql)
 	if err != nil {
 		return nil, eris.Wrap(err, "Could not get composer from database.")
 	}

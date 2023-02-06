@@ -3,6 +3,7 @@ package models
 import (
 	"context"
 	"encoding/json"
+	"github.com/doug-martin/goqu/v9"
 	"github.com/jackc/pgx/v5/pgxpool"
 	"github.com/rotisserie/eris"
 )
@@ -21,7 +22,7 @@ type Repo struct {
 	Db *pgxpool.Pool
 }
 
-const PostgresName = "postgres"
+var dialect = goqu.Dialect("postgres")
 
 func extractSql[T any](db *pgxpool.Pool, sql string, params ...any) (T, error) {
 	var result T

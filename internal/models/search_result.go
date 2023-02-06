@@ -2,6 +2,7 @@ package models
 
 import (
 	"context"
+	"github.com/doug-martin/goqu/v9"
 	"github.com/georgysavva/scany/v2/pgxscan"
 	"github.com/jackc/pgx/v5/pgtype"
 	"github.com/rotisserie/eris"
@@ -17,8 +18,16 @@ type SearchResult struct {
 
 func (repo *Repo) SearchComposers(query string, limit int) ([]*SearchResult, error) {
 	var results []*SearchResult
-	sql := `SELECT id, first_name, last_name, slug, last_name_score FROM search_composers_by_last_name($1, $2)`
-	err := pgxscan.Select(context.Background(), repo.Db, &results, sql, query, limit)
+
+	sql, _, err := dialect.
+		From(goqu.Func("search_composers_by_last_name", query, limit)).
+		Select("id", "first_name", "last_name", "slug", "last_name_score").
+		ToSQL()
+	if err != nil {
+		return nil, eris.Wrap(err, "Could not construct SQL request to get search results from database.")
+	}
+
+	err = pgxscan.Select(context.Background(), repo.Db, &results, sql)
 	if err != nil {
 		return results, eris.Wrap(err, "Could not get composers search results from database.")
 	}
