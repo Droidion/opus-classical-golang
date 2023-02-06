@@ -28,7 +28,7 @@ func initSentry(dsn string) error {
 		TracesSampleRate: 1.0,
 	})
 	if err != nil {
-		return eris.Wrap(err, "Could not initialise sentry")
+		return eris.Wrap(err, "sentry.Init")
 	}
 	defer sentry.Flush(2 * time.Second)
 	return nil

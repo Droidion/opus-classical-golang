@@ -7,6 +7,7 @@ import (
 	"github.com/rotisserie/eris"
 )
 
+// Recording represents musical recording.
 type Recording struct {
 	Id              int         `json:"int"`
 	Label           string      `json:"label"`
@@ -20,22 +21,24 @@ type Recording struct {
 	RecordingPeriod string
 }
 
-func (r *Recording) Process() {
+// EnrichForTemplate adds Recording data needed during template render.
+func (r *Recording) EnrichForTemplate() {
 	r.LengthFormatted = utils.FormatWorkLength(r.Length.Int32)
 	r.RecordingPeriod = utils.FormatYearsRangeString(r.YearStart.Int32, r.YearFinish.Int32)
 }
 
+// GetRecordings returns recordings from database for a given musical work.
 func (repo *Repo) GetRecordings(workId int) ([]*Recording, error) {
 	var recordings []*Recording
 
 	sql, _, err := dialect.Select(goqu.Func("recordings_by_work", workId).As("json")).ToSQL()
 	if err != nil {
-		return nil, eris.Wrap(err, "Could not construct SQL request to get recordings from database.")
+		return nil, eris.Wrap(err, "construct goqu request")
 	}
 
 	recordings, err = extractSql[[]*Recording](repo.Db, sql)
 	if err != nil {
-		return recordings, eris.Wrap(err, "Could not get recordings from database.")
+		return recordings, eris.Wrap(err, "extractSql")
 	}
 	return recordings, nil
 }

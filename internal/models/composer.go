@@ -8,6 +8,7 @@ import (
 	"strings"
 )
 
+// Composer represents composer, like Beethoven or Bach.
 type Composer struct {
 	Id                int         `json:"id"`
 	LastName          string      `json:"lastName"`
@@ -23,22 +24,24 @@ type Composer struct {
 	ImslpLink         pgtype.Text `json:"imslpLink"`
 }
 
-func (c *Composer) Process() {
+// EnrichForTemplate adds composer data needed during template render.
+func (c *Composer) EnrichForTemplate() {
 	c.CountriesRendered = strings.Join(c.Countries, ", ")
 	c.YearsLived = utils.FormatYearsRangeString(c.YearBorn.Int32, c.YearDied.Int32)
 }
 
+// GetComposer returns composer from database.
 func (repo *Repo) GetComposer(slug string) (*Composer, error) {
 	var composer *Composer
 
 	sql, _, err := dialect.Select(goqu.Func("composer_by_slug", slug).As("json")).ToSQL()
 	if err != nil {
-		return nil, eris.Wrap(err, "Could not construct SQL request to get composer from database.")
+		return nil, eris.Wrap(err, "construct goqu request")
 	}
 
 	composer, err = extractSql[*Composer](repo.Db, sql)
 	if err != nil {
-		return nil, eris.Wrap(err, "Could not get composer from database.")
+		return nil, eris.Wrap(err, "extractSql")
 	}
 	return composer, nil
 }

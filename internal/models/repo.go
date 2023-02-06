@@ -15,15 +15,17 @@ type ProvidesData interface {
 	GetRecordings(workId int) ([]*Recording, error)
 	SearchComposers(query string, limit int) ([]*SearchResult, error)
 	GetWork(id int) (*Work, error)
-	GetChildWork(parentWorkId int) ([]*Work, error)
+	GetChildWorks(parentWorkId int) ([]*Work, error)
 }
 
+// Repo represents database repository.
 type Repo struct {
 	Db *pgxpool.Pool
 }
 
 var dialect = goqu.Dialect("postgres")
 
+// extractSql extracts and parses JSON into Go struct from database column.
 func extractSql[T any](db *pgxpool.Pool, sql string, params ...any) (T, error) {
 	var result T
 	var rawJson string
@@ -34,11 +36,11 @@ func extractSql[T any](db *pgxpool.Pool, sql string, params ...any) (T, error) {
 		err = db.QueryRow(context.Background(), sql).Scan(&rawJson)
 	}
 	if err != nil {
-		return result, eris.Wrap(err, "Could not get JSON data from database.")
+		return result, eris.Wrap(err, "db.QueryRow")
 	}
 	err = json.Unmarshal([]byte(rawJson), &result)
 	if err != nil {
-		return result, eris.Wrap(err, "Could not parse JSON from database.")
+		return result, eris.Wrap(err, "json.Unmarshal")
 	}
 	return result, nil
 }

@@ -5,6 +5,7 @@ import (
 	"github.com/droidion/opus-classical-golang/internal/models"
 )
 
+// application contains all application-level data.
 type application struct {
 	config             *config
 	logger             LogsEvents

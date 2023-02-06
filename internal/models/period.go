@@ -6,7 +6,7 @@ import (
 	"github.com/rotisserie/eris"
 )
 
-// Period represents musical period, like Baroque or Romanticism.
+// Period represents musical period, like Baroque, or Romanticism.
 type Period struct {
 	Id          int         `json:"id"`
 	Name        string      `json:"name"`
@@ -17,14 +17,15 @@ type Period struct {
 	Composers   []Composer  `json:"composers"`
 }
 
-func (p *Period) Process() {
+// EnrichForTemplate adds period data needed during template render.
+func (p *Period) EnrichForTemplate() {
 	p.YearsLasted = fmt.Sprintf("%d–", p.YearStart.Int32)
 	if p.YearEnd.Valid {
 		p.YearsLasted = p.YearsLasted + fmt.Sprintf("%d", p.YearEnd.Int32)
 	}
 }
 
-// GetPeriods returns musical periods from database.
+// GetPeriods returns periods from database.
 func (repo *Repo) GetPeriods() ([]*Period, error) {
 	var periods []*Period
 	sql, _, err := dialect.
@@ -32,11 +33,11 @@ func (repo *Repo) GetPeriods() ([]*Period, error) {
 		Select("json").
 		ToSQL()
 	if err != nil {
-		return periods, eris.Wrap(err, "Could not construct SQL request to get periods from database.")
+		return periods, eris.Wrap(err, "goqu request")
 	}
 	periods, err = extractSql[[]*Period](repo.Db, sql)
 	if err != nil {
-		return periods, eris.Wrap(err, "Could not get periods from database.")
+		return periods, eris.Wrap(err, "extractSql")
 	}
 	return periods, nil
 }

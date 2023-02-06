@@ -11,7 +11,7 @@ func TestProcessPeriodFullYear(t *testing.T) {
 		YearStart: pgtype.Int4{Int32: 1900, Valid: true},
 		YearEnd:   pgtype.Int4{Int32: 1970, Valid: true},
 	}
-	period.Process()
+	period.EnrichForTemplate()
 	assert.Equal(t, "1900–1970", period.YearsLasted)
 }
 
@@ -20,6 +20,6 @@ func TestProcessPeriodOnlyStartYear(t *testing.T) {
 		YearStart: pgtype.Int4{Int32: 1900, Valid: true},
 		YearEnd:   pgtype.Int4{Int32: 0, Valid: false},
 	}
-	period.Process()
+	period.EnrichForTemplate()
 	assert.Equal(t, "1900–", period.YearsLasted)
 }

@@ -12,7 +12,7 @@ func TestProcessComposer(t *testing.T) {
 		YearBorn:  pgtype.Int4{Int32: 1900, Valid: true},
 		YearDied:  pgtype.Int4{Int32: 1970, Valid: true},
 	}
-	composer.Process()
+	composer.EnrichForTemplate()
 	assert.Equal(t, "Germany, France", composer.CountriesRendered)
 	assert.Equal(t, "1900–70", composer.YearsLived)
 }

@@ -9,7 +9,7 @@ import (
 func (app *application) initDb() *pgxpool.Pool {
 	pool, err := pgxpool.New(context.Background(), app.config.DatabaseConnectionString)
 	if err != nil {
-		app.logger.Fatal("Could not establish DB connection.", err)
+		app.logger.Fatal("pgxpool.New", err)
 	}
 	return pool
 }

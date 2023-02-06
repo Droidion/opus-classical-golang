@@ -1,7 +1,6 @@
 package main
 
 import (
-	"github.com/getsentry/sentry-go"
 	"github.com/gofiber/fiber/v2"
 )
 
@@ -28,6 +27,7 @@ func (app *application) addSecurity(c *fiber.Ctx) error {
 	return c.Next()
 }
 
+// errorInterceptor catches all errors from handlers
 func (app *application) errorInterceptor(c *fiber.Ctx, err error) error {
 	code := fiber.StatusInternalServerError
 	if e, ok := err.(*fiber.Error); ok {
@@ -35,14 +35,13 @@ func (app *application) errorInterceptor(c *fiber.Ctx, err error) error {
 	}
 
 	if code == 404 {
-		app.logger.InfoError("errorHandler caught 404, doing redirect", err)
+		app.logger.InfoError("errorInterceptor 404", err)
 		if c.Path() == "/" {
 			return c.Redirect("/", fiber.StatusSeeOther)
 		}
 		return c.Redirect("/404", fiber.StatusSeeOther)
 	}
 
-	app.logger.Error("errorInterceptor caught error", err)
-	sentry.CaptureException(err)
+	app.logger.Error("errorInterceptor non 404", err)
 	return c.Redirect("/error", fiber.StatusSeeOther)
 }

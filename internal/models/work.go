@@ -9,6 +9,7 @@ import (
 	"github.com/rotisserie/eris"
 )
 
+// Work represents music work, like Symphony No. 9 by Beethoven.
 type Work struct {
 	Id                     int         `json:"id" db:"id"`
 	Title                  string      `json:"title" db:"title"`
@@ -27,7 +28,8 @@ type Work struct {
 	Nickname               pgtype.Text `json:"nickname" db:"nickname"`
 }
 
-func (w *Work) Process() {
+// EnrichForTemplate adds work data needed during template render.
+func (w *Work) EnrichForTemplate() {
 	w.FullName = utils.FormatWorkName(w.Title, w.No.Int32, w.Nickname.String)
 	w.CatalogueNotation = utils.FormatCatalogueName(w.CatalogueName.String, w.CatalogueNumber.Int32, w.CataloguePostfix.String)
 	w.ComposePeriod = utils.FormatYearsRangeString(w.YearStart.Int32, w.YearFinish.Int32)
@@ -50,20 +52,22 @@ var worksDataset = dialect.
 		goqu.C("nickname").Table(worksTable),
 	)
 
+// GetWork returns work by its ID.
 func (repo *Repo) GetWork(id int) (*Work, error) {
 	var works []*Work
 	sql, _, err := worksDataset.Where(goqu.Ex{"works.id": id}).ToSQL()
 	if err != nil {
-		return nil, eris.Wrap(err, "Could not construct SQL request to get work from database.")
+		return nil, eris.Wrap(err, "construct goqu request")
 	}
 	err = pgxscan.Select(context.Background(), repo.Db, &works, sql)
 	if err != nil || len(works) == 0 {
-		return nil, eris.Wrap(err, "Could not get work from database.")
+		return nil, eris.Wrap(err, "pgxscan.Select")
 	}
 	return works[0], nil
 }
 
-func (repo *Repo) GetChildWork(parentWorkId int) ([]*Work, error) {
+// GetChildWorks returns all children works by parent work ID.
+func (repo *Repo) GetChildWorks(parentWorkId int) ([]*Work, error) {
 	var works []*Work
 
 	sql, _, err := worksDataset.
@@ -78,12 +82,12 @@ func (repo *Repo) GetChildWork(parentWorkId int) ([]*Work, error) {
 		).
 		ToSQL()
 	if err != nil {
-		return works, eris.Wrap(err, "Could not construct SQL request to get children works from database.")
+		return works, eris.Wrap(err, "construct goqu request")
 	}
 
 	err = pgxscan.Select(context.Background(), repo.Db, &works, sql)
 	if err != nil {
-		return works, eris.Wrap(err, "Could not get works from database.")
+		return works, eris.Wrap(err, "pgxscan.Select")
 	}
 	return works, nil
 }
