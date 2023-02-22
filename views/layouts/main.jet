@@ -12,7 +12,7 @@
     <link rel="icon" type="image/png" sizes="16x16" href="/static/favicon-16x16.png"/>
     <link rel="mask-icon" href="/static/safari-pinned-tab.svg" color="#fff"/>
     <link rel="manifest" href="/static/site.webmanifest"/>
-    <link rel="stylesheet" href="/static/styles/site.css?{{ Shared.appRunId }}"/>
+    <link rel="stylesheet" href="/static/styles/main.css?{{ Shared.appRunId }}"/>
     <script src="{{ Shared.umamiUri }}" data-website-id="{{ Shared.umamiWebsiteId }}" defer async></script>
     <script src="/static/scripts/main.js?{{ Shared.appRunId }}" type="module" defer></script>
 </head>

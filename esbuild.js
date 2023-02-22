@@ -10,7 +10,7 @@ esbuild
         entryPoints: ["scripts/main.ts"],
         mainFields: ["svelte", "browser", "module", "main"],
         bundle: true,
-        outdir: "static",
+        outdir: "static/scripts",
         minify: true,
         write: false,
         plugins: [
