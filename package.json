@@ -5,7 +5,8 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "sass": "sass --style=compressed styles/site.sass static/bundle.css",
+    "sass": "sass --style=compressed styles/main.sass static/styles/main.css",
+    "sass:watch": "sass --watch --style=compressed styles/main.sass static/styles/main.css",
     "build": "./esbuild.js"
   },
   "author": "",
