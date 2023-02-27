@@ -1,6 +1,7 @@
 package utils
 
 import (
+	"github.com/jackc/pgx/v5/pgtype"
 	"github.com/stretchr/testify/assert"
 	"testing"
 )
@@ -64,8 +65,12 @@ func TestFormatCatalogueName(t *testing.T) {
 }
 
 func TestFormatWorkName(t *testing.T) {
-	assert.Equal(t, "Symphony No. 9&nbsp;<em>Great</em>", FormatWorkName("Symphony", 9, "Great"))
-	assert.Equal(t, "Symphony No. 9", FormatWorkName("Symphony", 9, ""))
-	assert.Equal(t, "Symphony&nbsp;<em>Great</em>", FormatWorkName("Symphony", 0, "Great"))
-	assert.Equal(t, "", FormatWorkName("", 9, "Great"))
+	validNum := pgtype.Int4{Int32: 9, Valid: true}
+	invalidNum := pgtype.Int4{Int32: 0, Valid: false}
+	validStr := pgtype.Text{String: "Great", Valid: true}
+	invalidStr := pgtype.Text{String: "", Valid: false}
+	assert.Equal(t, "Symphony No. 9&nbsp;<em>Great</em>", FormatWorkName("Symphony", validNum, validStr))
+	assert.Equal(t, "Symphony No. 9", FormatWorkName("Symphony", validNum, invalidStr))
+	assert.Equal(t, "Symphony&nbsp;<em>Great</em>", FormatWorkName("Symphony", invalidNum, validStr))
+	assert.Equal(t, "", FormatWorkName("", validNum, validStr))
 }

@@ -2,6 +2,7 @@ package utils
 
 import (
 	"fmt"
+	"github.com/jackc/pgx/v5/pgtype"
 	"strconv"
 )
 
@@ -71,16 +72,16 @@ func FormatCatalogueName(catalogueName string, catalogueNumber int32, catalogueP
 }
 
 // FormatWorkName formats music work full name, like "Symphony No. 9 Great".
-func FormatWorkName(workTitle string, workNo int32, workNickname string) string {
+func FormatWorkName(workTitle string, workNo pgtype.Int4, workNickname pgtype.Text) string {
 	if workTitle == "" {
 		return ""
 	}
 	workName := workTitle
-	if workNo > 0 {
-		workName = workName + fmt.Sprintf(" No. %d", workNo)
+	if workNo.Valid {
+		workName = workName + fmt.Sprintf(" No. %d", workNo.Int32)
 	}
-	if len(workNickname) > 0 {
-		workName = workName + fmt.Sprintf("&nbsp;<em>%s</em>", workNickname)
+	if workNickname.Valid {
+		workName = workName + fmt.Sprintf("&nbsp;<em>%s</em>", workNickname.String)
 	}
 	return workName
 }
