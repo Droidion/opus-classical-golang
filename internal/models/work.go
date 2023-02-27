@@ -30,7 +30,7 @@ type Work struct {
 
 // EnrichForTemplate adds work data needed during template render.
 func (w *Work) EnrichForTemplate() {
-	w.FullName = utils.FormatWorkName(w.Title, w.No.Int32, w.Nickname.String)
+	w.FullName = utils.FormatWorkName(w.Title, w.No, w.Nickname)
 	w.CatalogueNotation = utils.FormatCatalogueName(w.CatalogueName.String, w.CatalogueNumber.Int32, w.CataloguePostfix.String)
 	w.ComposePeriod = utils.FormatYearsRangeString(w.YearStart.Int32, w.YearFinish.Int32)
 	w.AverageLengthFormatted = utils.FormatWorkLength(w.AverageMinutes.Int32)
@@ -47,6 +47,9 @@ var worksDataset = dialect.
 		goqu.C("year_start").Table(worksTable),
 		goqu.C("year_finish").Table(worksTable),
 		goqu.C("average_minutes").Table(worksTable),
+		goqu.C("name").Table(cataloguesTable).As("catalogue_name"),
+		goqu.C("catalogue_number").Table(worksTable),
+		goqu.C("catalogue_postfix").Table(worksTable),
 		goqu.C("name").Table(cataloguesTable).As("key"),
 		goqu.C("no").Table(worksTable),
 		goqu.C("nickname").Table(worksTable),
