@@ -1,5 +1,5 @@
 # Build app
-FROM golang:1.20.1-buster as go-builder
+FROM golang:1.20.2-buster as go-builder
 WORKDIR /app
 # Install packages
 COPY go.* ./
