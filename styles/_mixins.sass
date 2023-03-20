@@ -17,3 +17,11 @@ $breakpoints: ("desktop": 1300px)
       $width: $width - 1px
     @media only screen and (#{$type}-width: $width)
       @content
+
+@mixin theme($theme-name, $breakpoint: "")
+  @at-root #{selector-nest(":root[data-theme=#{$theme-name}]", &)}
+    @if $breakpoint != ""
+      @include mq($breakpoint)
+        @content
+    @else
+      @content

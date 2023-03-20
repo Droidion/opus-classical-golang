@@ -4,15 +4,23 @@
 .header
   @include mixins.centered-flex()
   @include mixins.block-width()
-  background-color: colors.$black-10
   grid-area: header
   height: 4rem
   justify-content: space-between
   top: 0
   z-index: 1
 
+  @include mixins.theme(light)
+    background-color: colors.$black-10
+  @include mixins.theme(light, 'desktop')
+    background-color: colors.$white
+
+  @include mixins.theme(dark)
+    background-color: colors.$light-grey
+  @include mixins.theme(dark, 'desktop')
+    background-color: colors.$soft-black
+
   @include mixins.mq('desktop')
-    background-color: white
     height: 6rem
     position: sticky
 
@@ -25,6 +33,12 @@
   &__logo
     height: 36px
     width: 36px
+
+    @include mixins.theme(light)
+      fill: colors.$black
+
+    @include mixins.theme(dark)
+      fill: colors.$rose-gold
 
     @include mixins.mq('desktop')
       height: 72px
@@ -74,6 +88,10 @@
     @include mixins.mq('desktop')
       width: 24px
       height: 24px
+
+    @include mixins.theme(dark, 'desktop')
+      -webkit-filter: invert(.8)
+      filter: invert(.8)
 
 .search
   background: white
@@ -125,4 +143,7 @@
 
     @include mixins.mq('desktop')
       margin: 0 1rem
-      
+
+  // &__item > a
+  //   @include mixins.theme(dark, 'desktop')
+  //     color: colors.$rose-gold

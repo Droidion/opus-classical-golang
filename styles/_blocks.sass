@@ -45,11 +45,17 @@
 
 
 .cover
-  border: 1px solid colors.$black-20
   float: left
   height: 100px
   margin-right: 1rem
   width: 100px
+
+  @include mixins.theme(light)
+    border: 1px solid colors.$black-20
+
+  @include mixins.theme(dark)
+    border: 1px solid colors.$white-80
+
 
   @include mixins.mq('desktop')
     height: 200px
