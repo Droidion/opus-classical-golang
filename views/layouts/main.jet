@@ -15,6 +15,7 @@
     <link rel="stylesheet" href="/static/styles/main.css?{{ Shared.appRunId }}"/>
     <script src="{{ Shared.umamiUri }}" data-website-id="{{ Shared.umamiWebsiteId }}" defer async></script>
     <script src="/static/scripts/main.js?{{ Shared.appRunId }}" type="module" defer></script>
+    <script src="/static/scripts/theme.js?{{ Shared.appRunId }}" type="module" defer></script>
 </head>
 <body>
 {{ include "../partials/header" }}
