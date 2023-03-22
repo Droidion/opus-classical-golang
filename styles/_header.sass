@@ -94,7 +94,7 @@
       filter: invert(.8)
 
 .search
-  background: white
+  background: colors.$white
   font-size: 1.1rem
   position: absolute
   top: 8rem
@@ -103,6 +103,9 @@
   border: colors.$black-80
   border-radius: 4px
   box-shadow: 0 0 0.6rem rgba(0, 0, 0, 0.4)
+
+  @include mixins.theme(dark)
+    background: colors.$med-grey
 
   a:hover
     text-decoration: none
@@ -126,6 +129,7 @@
     background: colors.$black-10
     border: 0
     width: calc(100% - 0.8rem)
+    color: colors.$white-80
 
     &:focus
       outline: none
