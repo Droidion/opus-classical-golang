@@ -16,7 +16,7 @@
     background-color: colors.$white
 
   @include mixins.theme(dark)
-    background-color: colors.$light-grey
+    background-color: colors.$med-grey
   @include mixins.theme(dark, 'desktop')
     background-color: colors.$soft-black
 
@@ -89,7 +89,7 @@
       width: 24px
       height: 24px
 
-    @include mixins.theme(dark, 'desktop')
+    @include mixins.theme(dark)
       -webkit-filter: invert(.8)
       filter: invert(.8)
 

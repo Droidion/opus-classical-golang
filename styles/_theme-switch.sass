@@ -22,10 +22,16 @@
     position: relative
     align-items: center
     background: none
-    &:hover, &:focus
-      background: colors.$light-grey
+
     @include mixins.theme(light)
       color: colors.$black
+      &:hover, &:focus
+        background: colors.$light-grey
+
+    @include mixins.theme(light, 'desktop')
+      &:hover, &:focus
+        background: colors.$black-10
+
     @include mixins.theme(dark)
       color: colors.$rose-gold
 
@@ -44,8 +50,14 @@
 .toggle-switch__input:checked + .toggle-switch__label
   transition: background 0.2s ease
   background: none
-  &:hover, &:focus
-    background: colors.$med-grey
+
+  @include mixins.theme(dark)
+    &:hover, &:focus
+      background: colors.$black-20
+
+  @include mixins.theme(dark, 'desktop')
+    &:hover, &:focus
+      background: colors.$med-grey
 
 .toggle-switch__input:checked + .toggle-switch__label > .toggle-switch__icon
   &:first-child
