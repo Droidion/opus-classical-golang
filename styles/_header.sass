@@ -106,6 +106,7 @@
 
   @include mixins.theme(dark)
     background: colors.$med-grey
+    color: colors.$white-60
 
   a:hover
     text-decoration: none
@@ -129,7 +130,9 @@
     background: colors.$black-10
     border: 0
     width: calc(100% - 0.8rem)
-    color: colors.$white-80
+
+    @include mixins.theme(dark)
+      color: colors.$white-60
 
     &:focus
       outline: none
