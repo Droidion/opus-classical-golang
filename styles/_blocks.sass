@@ -42,6 +42,8 @@
 
     img
       width: 24px
+      @include mixins.theme(dark)
+        opacity: 0.8
 
 
 .cover
@@ -55,6 +57,7 @@
 
   @include mixins.theme(dark)
     border: 1px solid colors.$white-60
+    opacity: 0.9
 
 
   @include mixins.mq('desktop')
