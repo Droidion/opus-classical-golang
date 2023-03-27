@@ -22,6 +22,7 @@
     position: relative
     align-items: center
     background-color: transparent
+    transition: color 0.2s linear
 
     @include mixins.theme(light)
       color: colors.$cinnamon
@@ -41,6 +42,7 @@
     display: flex
     align-items: center
     justify-content: center
+    transition: display 0.2s linear
     &:first-child
       display: none
     &:last-child
