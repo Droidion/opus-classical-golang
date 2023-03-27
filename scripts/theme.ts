@@ -32,7 +32,8 @@ const toggleColorTheme = (isDark: boolean): string =>
 
 /**
  * defines init color theme in the following priority order: 1. prev stored color theme, 2. system color scheme, 3. theme light;
- * adds event listener for tracking theme switch and system color scheme change
+ * adds event listener for tracking theme switch and system color scheme change;
+ * makes theme switcher label visible
  */
 const defineColorThemeOnLoad = () => {
   const themeSwitcher = document.getElementById(
@@ -68,6 +69,10 @@ const defineColorThemeOnLoad = () => {
   }
 
   setColorTheme(currentTheme);
+  const switchLabel = document.querySelector(
+    ".toggle-switch__label"
+  )! as HTMLLabelElement;
+  switchLabel.classList.remove("d-none");
 };
 
 export default (() => {
