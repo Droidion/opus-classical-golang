@@ -97,6 +97,19 @@ p
 
 .pic-404
   margin: 4rem auto
-  @include mixins.theme(dark)
-    -webkit-filter: invert(.8)
-    filter: invert(.8)
+  display: flex
+  justify-self: center
+
+  &__body
+    @include mixins.theme(light)
+      fill: colors.$black-10
+
+    @include mixins.theme(dark)
+      fill: colors.$white-60
+  
+  &__digits
+    @include mixins.theme(light)
+      fill: colors.$black
+
+    @include mixins.theme(dark)
+      fill: colors.$white-80
