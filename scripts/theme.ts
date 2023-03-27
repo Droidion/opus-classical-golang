@@ -47,7 +47,6 @@ const defineColorThemeOnLoad = () => {
     );
     storeColorTheme(colorTheme);
     setColorTheme(colorTheme);
-    console.log("toggle currentTheme", colorTheme);
   });
 
   colorModeMediaQuery.addEventListener("change", () => {
@@ -55,13 +54,11 @@ const defineColorThemeOnLoad = () => {
     storeColorTheme(colorTheme);
     setColorTheme(colorTheme);
     themeSwitcher.checked = colorTheme === "dark";
-    console.log("system change currentTheme", colorTheme);
   });
 
   let currentTheme = "light";
 
   const isSystemColorThemeDark = colorModeMediaQuery.matches;
-  console.log("isSystemColorThemeDark", isSystemColorThemeDark);
   const prevStoredTheme = getStoredColorTheme();
   const prevStoredDark = prevStoredTheme && prevStoredTheme === "dark";
 
@@ -71,8 +68,6 @@ const defineColorThemeOnLoad = () => {
   }
 
   setColorTheme(currentTheme);
-
-  console.log("currentTheme on load", currentTheme);
 };
 
 export default (() => {
