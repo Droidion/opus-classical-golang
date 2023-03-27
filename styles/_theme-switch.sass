@@ -21,16 +21,16 @@
     cursor: pointer
     position: relative
     align-items: center
-    background: none
+    background-color: transparent
 
     @include mixins.theme(light)
       color: colors.$cinnamon
       &:hover, &:focus
-        background: colors.$light-grey
+        background-color: colors.$light-grey
 
     @include mixins.theme(light, 'desktop')
       &:hover, &:focus
-        background: colors.$black-10
+        background-color: colors.$black-10
 
     @include mixins.theme(dark)
       color: colors.$rose-gold
@@ -48,16 +48,16 @@
 
 
 .toggle-switch__input:checked + .toggle-switch__label
-  transition: background 0.2s ease
-  background: none
+  transition: background-color 0.2s ease
+  background-color: transparent
 
   @include mixins.theme(dark)
     &:hover, &:focus
-      background: colors.$black-20
+      background-color: colors.$black-20
 
   @include mixins.theme(dark, 'desktop')
     &:hover, &:focus
-      background: colors.$med-grey
+      background-color: colors.$med-grey
 
 .toggle-switch__input:checked + .toggle-switch__label > .toggle-switch__icon
   &:first-child
