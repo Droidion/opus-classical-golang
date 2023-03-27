@@ -49,7 +49,9 @@ h2
   font-size: 1.4rem
   margin-top: 1rem
 
-h2
+  @include mixins.theme(light)
+    color: colors.$cinnamon
+
   @include mixins.theme(dark)
     color: colors.$rose-gold
 
@@ -66,7 +68,7 @@ hr
   margin: 0.2rem 0
 
   @include mixins.theme(light)
-    background-color: colors.$black-20
+    background-color: colors.$cinnamon
 
   @include mixins.theme(dark)
     background-color: colors.$rose-gold
