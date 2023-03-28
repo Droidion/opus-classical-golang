@@ -95,21 +95,26 @@ p
   @include mixins.theme(dark)
     background-color: colors.$white-20
 
+
+.wrap-404
+  display: flex
+  justify-content: center
+  align-items: center
+  flex-grow: 1
+
 .pic-404
   margin: 4rem auto
-  display: flex
-  justify-self: center
 
   &__body
     @include mixins.theme(light)
-      fill: colors.$black-10
-
-    @include mixins.theme(dark)
-      fill: colors.$white-60
-  
-  &__digits
-    @include mixins.theme(light)
-      fill: colors.$black
+      fill: colors.$white
 
     @include mixins.theme(dark)
       fill: colors.$white-80
+
+  &__digits
+    @include mixins.theme(light)
+      fill: colors.$cinnamon
+
+    @include mixins.theme(dark)
+      fill: colors.$rose-gold
