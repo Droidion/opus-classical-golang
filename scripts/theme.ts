@@ -1,3 +1,8 @@
+enum ColorThemes {
+  Dark = "dark",
+  Light = "light",
+}
+
 /**
  * checks if selected element or event target exists and is of type InputElement
  */
@@ -29,7 +34,7 @@ const getStoredColorTheme = (): string | null => localStorage.getItem("theme");
  * toggles dark/light color theme
  */
 const toggleColorTheme = (isDark: boolean): string =>
-  isDark ? "dark" : "light";
+  isDark ? ColorThemes.Dark : ColorThemes.Light;
 
 /**
  *  toggles checkbox checked state
@@ -115,7 +120,10 @@ const init = () => {
 
     const currentTheme = defineColorTheme(colorModeMediaQuery.matches);
 
-    toggleThemeSwitcherState(themeSwitcher, currentTheme === "dark");
+    if (currentTheme === "dark") {
+      toggleThemeSwitcherState(themeSwitcher, true);
+    }
+
     setColorTheme(currentTheme);
     showIconLabel(document.querySelector(".toggle-switch__label"));
   }
