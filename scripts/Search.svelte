@@ -127,7 +127,7 @@
 </script>
 
 
-<div class="search-button" on:click={showSearch} on:keypress={showSearch}>
+<div class="search-button label" on:click={showSearch} on:keypress={showSearch}>
     <img src="/static/img/search-icon.svg" alt="Search"/>
 </div>
 

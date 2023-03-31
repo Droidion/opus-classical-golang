@@ -8,7 +8,7 @@
   align-items: center
   display: flex
 
-$breakpoints: ("desktop": 1300px)
+$breakpoints: ("desktop": 1300px, "tablet": 768px)
 
 @mixin mq($width, $type: min)
   @if map_has_key($breakpoints, $width)
