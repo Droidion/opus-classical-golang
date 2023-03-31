@@ -128,7 +128,7 @@
 
 
 <div class="search-button label" on:click={showSearch} on:keypress={showSearch}>
-    <img src="/static/img/search-icon.svg" alt="Search"/>
+    <img class="icon" src="/static/img/search-icon.svg" alt="Search"/>
 </div>
 
 {#if searchVisible}

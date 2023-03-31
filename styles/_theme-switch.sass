@@ -14,10 +14,6 @@
     overflow: hidden
     transition: color 0.2s linear
 
-    // @include mixins.mq('desktop')
-    //   width: 2.5rem
-    //   height: 2.5rem
-
     @include mixins.theme(light)
       color: colors.$cinnamon
 
@@ -36,29 +32,6 @@
         display: flex
       @include mixins.theme(dark)
         display: none
-
-    @include mixins.mq('desktop')
-      width: 1.5rem
-      height: 1.5rem
-
-
-// .toggle-switch__input:checked + .toggle-switch__label
-//   transition: background-color 0.2s ease
-//   background-color: transparent
-
-//   @include mixins.theme(dark)
-//     &:hover, &:focus
-//       background-color: colors.$black-20
-
-//   @include mixins.theme(dark, 'desktop')
-//     &:hover, &:focus
-//       background-color: colors.$med-grey
-
-// .toggle-switch__input:checked + .toggle-switch__label > .toggle-switch__icon
-//   &:first-child
-//     display: flex
-//   &:last-child
-//     display: none
 
 .d-none
   display: none

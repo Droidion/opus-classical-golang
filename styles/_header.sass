@@ -88,13 +88,6 @@
   cursor: pointer
 
   img
-    width: 18px
-    height: 18px
-
-    @include mixins.mq('desktop')
-      width: 24px
-      height: 24px
-
     @include mixins.theme(dark)
       -webkit-filter: invert(.8)
       filter: invert(.8)
@@ -171,9 +164,10 @@
 .icon
   width: 1rem
   height: 1rem
-  display: flex
-  align-items: center
-  justify-content: center
+
+  @include mixins.mq('desktop')
+    width: 1.5rem
+    height: 1.5rem
 
 .label
   display: flex
@@ -186,8 +180,8 @@
   background-color: transparent
 
   @include mixins.mq('tablet')
-    width: 2rem
-    height: 2rem
+    width: 1.8rem
+    height: 1.8rem
 
   @include mixins.mq('desktop')
     width: 2.5rem
