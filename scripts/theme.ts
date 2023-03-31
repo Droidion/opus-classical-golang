@@ -1,80 +1,126 @@
 /**
- * sets data-attribute 'theme' of the root html element
- * @param colorTheme theme name
+ * checks if selected element or event target exists and is of type InputElement
  */
-const setColorTheme = (colorTheme: string): void => {
-  document.documentElement.dataset.theme = colorTheme;
+const isInputElement = (
+  elem: HTMLElement | EventTarget | null
+): elem is HTMLInputElement =>
+  Boolean(elem) && elem instanceof HTMLInputElement;
+
+/**
+ * sets data-attribute 'theme' of the root html element
+ */
+const setColorTheme = (themeName: string): void => {
+  document.documentElement.dataset.theme = themeName;
 };
 
 /**
  * stores current color theme in the localStorage
- * @param colorTheme theme name
  */
-const storeColorTheme = (colorTheme: string): void => {
-  localStorage.setItem("theme", colorTheme);
+const storeColorTheme = (themeName: string): void => {
+  localStorage.setItem("theme", themeName);
 };
 
 /**
  * gets previously stored color theme from the localStorage
- * @returns color theme name if any
  */
-const getStoredColorTheme = (): string | null => {
-  const storedColorTheme = localStorage.getItem("theme");
-  return storedColorTheme;
-};
+const getStoredColorTheme = (): string | null => localStorage.getItem("theme");
 
 /**
- * toggles dark/light color mode
- * @param isDark if checkbox checked
+ * toggles dark/light color theme
  */
 const toggleColorTheme = (isDark: boolean): string =>
   isDark ? "dark" : "light";
 
 /**
- * defines init color theme in the following priority order: 1. prev stored color theme, 2. system color scheme, 3. theme light;
+ *  toggles checkbox checked state
+ */
+const toggleThemeSwitcherState = (
+  switcher: HTMLElement,
+  isDark: boolean
+): void => {
+  if (isInputElement(switcher)) {
+    switcher.checked = isDark;
+  }
+};
+
+/**
+ * cb triggered when checkbox is checked
+ */
+const trackColorThemeChange = ({ target }: Event): void => {
+  if (isInputElement(target)) {
+    const colorTheme = toggleColorTheme(target.checked);
+    storeColorTheme(colorTheme);
+    setColorTheme(colorTheme);
+  }
+};
+
+/**
+ * cb triggered when user changes system color scheme
+ */
+const trackSystemColorModeChange = (
+  switcher: HTMLElement,
+  isSystemDarkModeOn: boolean
+): void => {
+  const colorTheme = toggleColorTheme(isSystemDarkModeOn);
+
+  storeColorTheme(colorTheme);
+  setColorTheme(colorTheme);
+  toggleThemeSwitcherState(switcher, isSystemDarkModeOn);
+};
+
+/**
+ * shows checkbox label (sun/moon icon)
+ */
+const showIconLabel = (label: HTMLLabelElement | null): void => {
+  if (label) {
+    label.classList.remove("d-none");
+  }
+};
+
+/**
+ * defines current color theme in the following priority order:
+ * 1. prev stored color theme, 2. system color scheme, 3. theme light;
+ */
+const defineColorTheme = (isSystemColorThemeDark: boolean): string => {
+  let currentTheme = "light";
+
+  const prevStoredTheme = getStoredColorTheme();
+  const isPrevStoredDark = Boolean(
+    prevStoredTheme && prevStoredTheme === "dark"
+  );
+
+  if (isPrevStoredDark || (!prevStoredTheme && isSystemColorThemeDark)) {
+    currentTheme = "dark";
+  }
+
+  return currentTheme;
+};
+
+/**
+ * defines color theme and checkbox state;
  * adds event listener for tracking theme switch and system color scheme change;
  * makes theme switcher label visible
  */
-const defineColorThemeOnLoad = () => {
-  const themeSwitcher = document.getElementById(
-    "switcher"
-  )! as HTMLInputElement;
+const init = () => {
+  const themeSwitcher = document.getElementById("switcher");
 
   const colorModeMediaQuery = window.matchMedia("(prefers-color-scheme: dark)");
 
-  themeSwitcher.addEventListener("change", (e) => {
-    const colorTheme = toggleColorTheme(
-      (e!.target as HTMLInputElement).checked
-    );
-    storeColorTheme(colorTheme);
-    setColorTheme(colorTheme);
-  });
+  if (themeSwitcher) {
+    themeSwitcher.addEventListener("change", trackColorThemeChange);
 
-  colorModeMediaQuery.addEventListener("change", () => {
-    const colorTheme = toggleColorTheme(colorModeMediaQuery.matches);
-    storeColorTheme(colorTheme);
-    setColorTheme(colorTheme);
-    themeSwitcher.checked = colorTheme === "dark";
-  });
+    colorModeMediaQuery.addEventListener("change", (e) => {
+      trackSystemColorModeChange(themeSwitcher, colorModeMediaQuery.matches);
+    });
 
-  let currentTheme = "light";
+    const currentTheme = defineColorTheme(colorModeMediaQuery.matches);
 
-  const isSystemColorThemeDark = colorModeMediaQuery.matches;
-  const prevStoredTheme = getStoredColorTheme();
-  const prevStoredDark = prevStoredTheme && prevStoredTheme === "dark";
-
-  if (prevStoredDark || (!prevStoredTheme && isSystemColorThemeDark)) {
-    currentTheme = "dark";
-    themeSwitcher.checked = true;
+    toggleThemeSwitcherState(themeSwitcher, currentTheme === "dark");
+    setColorTheme(currentTheme);
+    showIconLabel(document.querySelector(".toggle-switch__label"));
   }
-
-  setColorTheme(currentTheme);
-  const switchLabel = document.querySelector(
-    ".toggle-switch__label"
-  )! as HTMLLabelElement;
-  switchLabel.classList.remove("d-none");
 };
 
-export default (() => {
-  document.addEventListener("DOMContentLoaded", () => defineColorThemeOnLoad());
-})();
+export default () => {
+  document.addEventListener("DOMContentLoaded", () => init());
+};

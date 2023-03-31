@@ -1,6 +1,9 @@
-import Search from './Search.svelte'
+import Search from "./Search.svelte";
+import initColorTheme from "./theme";
 
-const target = document.getElementById('searchBlock')
-const app = target ? new Search({target}) : undefined
+initColorTheme();
 
-export default app
+const target = document.getElementById("searchBlock");
+const app = target ? new Search({ target }) : undefined;
+
+export default app;

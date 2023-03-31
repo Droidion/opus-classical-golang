@@ -7,7 +7,7 @@ import { compress } from "esbuild-plugin-compress";
 
 esbuild
   .build({
-    entryPoints: ["scripts/main.ts", "scripts/theme.ts"],
+    entryPoints: ["scripts/main.ts"],
     mainFields: ["svelte", "browser", "module", "main"],
     bundle: true,
     outdir: "static/scripts",
