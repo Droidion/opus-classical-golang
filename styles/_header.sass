@@ -25,10 +25,7 @@
     position: sticky
 
 .logo-link
-  max-width: 70%
-
-  @include mixins.mq('tablet')
-    max-width: 80%
+  max-width: 50%
 
 .logo-link:hover
   text-decoration: none
@@ -152,7 +149,7 @@
   display: flex
 
 
-  &__item
+  &__item + *
     margin-left: 1rem
 
     @include mixins.mq('tablet')
