@@ -8,6 +8,11 @@
   align-items: center
   display: flex
 
+@mixin hover-desktop()
+  @media(hover: hover)
+    &:hover
+      @content
+
 $breakpoints: ("desktop": 1300px, "tablet": 768px)
 
 @mixin mq($width, $type: min)
