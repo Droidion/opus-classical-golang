@@ -148,6 +148,10 @@
   @include mixins.centered-flex()
   display: flex
 
+  &__item > a
+    font-size: 1rem
+    @include mixins.mq('desktop')
+      font-size: 1.25rem
 
   &__item + *
     margin-left: 1rem
@@ -163,8 +167,8 @@
   height: 1rem
 
   @include mixins.mq('desktop')
-    width: 1.5rem
-    height: 1.5rem
+    width: 1.3rem
+    height: 1.3rem
 
 .label
   display: flex
@@ -175,6 +179,8 @@
   border-radius: 50%
   cursor: pointer
   background-color: transparent
+  &:hover, &:focus
+    transform: scale(1.2)
 
   @include mixins.mq('tablet')
     width: 1.8rem
@@ -184,18 +190,18 @@
     width: 2.5rem
     height: 2.5rem
 
-  @include mixins.theme(light)
-    &:hover, &:focus
-      background-color: colors.$light-grey
+  // @include mixins.theme(light)
+  //   &:hover, &:focus
+  //     background-color: colors.$light-grey
 
-  @include mixins.theme(light, 'desktop')
-    &:hover, &:focus
-      background-color: colors.$black-10
+  // @include mixins.theme(light, 'desktop')
+  //   &:hover, &:focus
+  //     background-color: colors.$black-10
 
-  @include mixins.theme(dark)
-    &:hover, &:focus
-      background-color: colors.$black-20
+  // @include mixins.theme(dark)
+  //   &:hover, &:focus
+  //     background-color: colors.$black-20
 
-  @include mixins.theme(dark, 'desktop')
-    &:hover, &:focus
-      background-color: colors.$med-grey
+  // @include mixins.theme(dark, 'desktop')
+  //   &:hover, &:focus
+  //     background-color: colors.$med-grey
