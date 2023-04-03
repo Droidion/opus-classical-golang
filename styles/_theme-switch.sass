@@ -15,10 +15,10 @@
     transition: color 0.2s linear
 
     @include mixins.theme(light)
-      color: colors.$cinnamon
+      filter: invert(30%) sepia(40%) saturate(1532%) hue-rotate(12deg) brightness(98%) contrast(98%) // colors.$cinnamon
 
     @include mixins.theme(dark)
-      color: colors.$rose-gold
+      filter: invert(73%) sepia(16%) saturate(822%) hue-rotate(350deg) brightness(91%) contrast(85%) // colors.$rose-gold
 
   &__icon
     transition: display 0.2s linear

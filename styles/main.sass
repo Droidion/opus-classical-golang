@@ -20,6 +20,8 @@ body
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen-Sans, Ubuntu, Cantarell, 'Helvetica Neue', sans-serif
   grid-template-rows: auto 1fr auto
   grid-template-areas: 'header' 'main' 'footer'
+  color: colors.$black
+  background-color: colors.$white
 
   @include mixins.theme(light)
     color: colors.$black
@@ -52,6 +54,7 @@ h1
 h2
   font-size: 1.4rem
   margin-top: 1rem
+  color: colors.$black
 
   @include mixins.theme(light)
     color: colors.$cinnamon
@@ -70,6 +73,7 @@ hr
   border: 0
   height: 1px
   margin: 0.2rem 0
+  background-color: colors.$black-20
 
   @include mixins.theme(light)
     background-color: colors.$cinnamon
@@ -88,6 +92,7 @@ p
   position: relative
   width: 1px
   z-index: -1
+  background-color: colors.$black-20
 
   @include mixins.theme(light)
     background-color: colors.$black-20
@@ -104,6 +109,8 @@ p
 
 .pic-404
   margin: 4rem auto
+  width: 22rem
+  height: 22rem
 
   &__body
     @include mixins.theme(light)

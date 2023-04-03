@@ -8,8 +8,7 @@ enum ColorThemes {
  */
 const isInputElement = (
   elem: HTMLElement | EventTarget | null
-): elem is HTMLInputElement =>
-  Boolean(elem) && elem instanceof HTMLInputElement;
+): elem is HTMLInputElement => !!elem && elem instanceof HTMLInputElement;
 
 /**
  * sets data-attribute 'theme' of the root html element
@@ -87,15 +86,15 @@ const showIconLabel = (label: HTMLLabelElement | null): void => {
  * 1. prev stored color theme, 2. system color scheme, 3. theme light;
  */
 const defineColorTheme = (isSystemColorThemeDark: boolean): string => {
-  let currentTheme = "light";
+  let currentTheme = ColorThemes.Light;
 
   const prevStoredTheme = getStoredColorTheme();
   const isPrevStoredDark = Boolean(
-    prevStoredTheme && prevStoredTheme === "dark"
+    prevStoredTheme && prevStoredTheme === ColorThemes.Dark
   );
 
   if (isPrevStoredDark || (!prevStoredTheme && isSystemColorThemeDark)) {
-    currentTheme = "dark";
+    currentTheme = ColorThemes.Dark;
   }
 
   return currentTheme;
@@ -120,7 +119,7 @@ const init = () => {
 
     const currentTheme = defineColorTheme(colorModeMediaQuery.matches);
 
-    if (currentTheme === "dark") {
+    if (currentTheme === ColorThemes.Dark) {
       toggleThemeSwitcherState(themeSwitcher, true);
     }
 

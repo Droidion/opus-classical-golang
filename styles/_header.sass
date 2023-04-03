@@ -24,8 +24,8 @@
     height: 6rem
     position: sticky
 
-.logo-link
-  max-width: 50%
+.logo-linkа
+  max-width: 60%
 
 .logo-link:hover
   text-decoration: none
@@ -38,10 +38,10 @@
     width: 36px
 
     @include mixins.theme(light)
-      fill: colors.$dark-chocolate
+      filter: invert(10%) sepia(15%) saturate(6310%) hue-rotate(25deg) brightness(93%) contrast(99%) // colors.$dark-chocolate
 
     @include mixins.theme(dark)
-      fill: colors.$floral-white
+      filter: invert(99%) sepia(87%) saturate(350%) hue-rotate(299deg) brightness(102%) contrast(102%) // colors.$floral-white
 
     @include mixins.mq('desktop')
       height: 72px
@@ -98,6 +98,7 @@
   border: colors.$black-80
   border-radius: 4px
   box-shadow: 0 0 0.6rem rgba(0, 0, 0, 0.4)
+  background: colors.$white
 
   @include mixins.theme(light)
     background: colors.$white
@@ -153,8 +154,8 @@
     @include mixins.mq('desktop')
       font-size: 1.25rem
 
-  &__item + *
-    margin-left: 1rem
+  &__item
+    margin-left: 0.5rem
 
     @include mixins.mq('tablet')
       margin-left: 1.5rem
@@ -189,19 +190,3 @@
   @include mixins.mq('desktop')
     width: 2.5rem
     height: 2.5rem
-
-  // @include mixins.theme(light)
-  //   &:hover, &:focus
-  //     background-color: colors.$light-grey
-
-  // @include mixins.theme(light, 'desktop')
-  //   &:hover, &:focus
-  //     background-color: colors.$black-10
-
-  // @include mixins.theme(dark)
-  //   &:hover, &:focus
-  //     background-color: colors.$black-20
-
-  // @include mixins.theme(dark, 'desktop')
-  //   &:hover, &:focus
-  //     background-color: colors.$med-grey
