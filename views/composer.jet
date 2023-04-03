@@ -3,11 +3,13 @@
     <span>{{ Composer.CountriesRendered }}</span>
     <span class="vertical-separator"></span>
     <span>{{ Composer.YearsLived }}</span>
-    <span class="vertical-separator"></span>
-    <a href="{{ Composer.WikipediaLink }}">Wikipedia</a>
-    {{ if Composer.ImslpLink }}
+    {{ if Composer.WikipediaLink.Valid }}
         <span class="vertical-separator"></span>
-        <a href="{{ Composer.ImslpLink }}">IMSLP</a>
+        <a href="{{ Composer.WikipediaLink.String }}">Wikipedia</a>
+    {{ end }}
+    {{ if Composer.ImslpLink.Valid }}
+        <span class="vertical-separator"></span>
+        <a href="{{ Composer.ImslpLink.String }}">IMSLP</a>
     {{ end }}
 </div>
 
