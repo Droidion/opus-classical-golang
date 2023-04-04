@@ -1,2 +1,4 @@
 <h1>Page not found</h1>
-<img alt="Page not found" class="pic-404" width="400" height="400" src="/static/img/404.webp"/>
+<div class="wrap-404">
+  {{ include "./partials/404-pic" }}
+</div>

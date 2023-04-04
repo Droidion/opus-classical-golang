@@ -1,15 +1,22 @@
 <header class="header">
-    <a class="logo-link" href="/">
-        <div class="brand">
-            <img alt="Opus Classical logo" class="brand__logo" width="72" height="72" src="/static/img/composers-logo.png"/>
-            <div class="brand__title">
-                <div class="brand__name">Opus Classical</div>
-                <div class="brand__description">Catalogue for streaming classical music</div>
-            </div>
-        </div>
-    </a>
-    <nav class="menu">
-        <div class="menu__item" id="searchBlock"></div>
-        <div class="menu__item"><a href="/about">About</a></div>
-    </nav>
+  <a class="logo-link" href="/">
+    <div class="brand">
+      <img alt="App logo" class="brand__logo" src="/static/img/app-logo.svg"/>
+      <div class="brand__title">
+        <div class="brand__name">Opus Classical</div>
+        <div class="brand__description">Catalogue for streaming classical music</div>
+      </div>
+    </div>
+  </a>
+  <nav class="menu">
+    <div id="theme-switch" class="menu__item toggle-switch">
+      <input type="checkbox" name="switcher" id="switcher" class="toggle-switch__input" aria-labelledby="switch-label">
+      <label for="switcher" class="label toggle-switch__label d-none" id="switch-label" aria-label="Switch between dark and light mode">
+        <img alt="color theme dark" class="icon toggle-switch__icon" src="/static/img/moon.svg"/>
+        <img alt="color theme light" class="icon toggle-switch__icon" src="/static/img/sun.svg"/>
+      </label>
+    </div>
+    <div class="menu__item" id="searchBlock"></div>
+    <div class="menu__item"><a href="/about">About</a></div>
+  </nav>
 </header>

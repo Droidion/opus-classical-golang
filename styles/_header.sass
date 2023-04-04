@@ -4,17 +4,26 @@
 .header
   @include mixins.centered-flex()
   @include mixins.block-width()
-  background-color: colors.$black-10
   grid-area: header
   height: 4rem
   justify-content: space-between
   top: 0
   z-index: 1
 
+  @include mixins.theme(light)
+    background-color: colors.$black-10
+  @include mixins.theme(light, 'desktop')
+    background-color: colors.$white
+
+  @include mixins.theme(dark)
+    background-color: colors.$med-grey
+  @include mixins.theme(dark, 'desktop')
+    background-color: colors.$soft-black
+
   @include mixins.mq('desktop')
-    background-color: white
     height: 6rem
     position: sticky
+
 
 .logo-link:hover
   text-decoration: none
@@ -25,6 +34,12 @@
   &__logo
     height: 36px
     width: 36px
+
+    @include mixins.theme(light)
+      filter: invert(17%) sepia(45%) saturate(0%) hue-rotate(278deg) brightness(100%) contrast(99%) //colors.$black
+
+    @include mixins.theme(dark)
+      filter: invert(.8)
 
     @include mixins.mq('desktop')
       height: 72px
@@ -68,15 +83,11 @@
   cursor: pointer
 
   img
-    width: 18px
-    height: 18px
-
-    @include mixins.mq('desktop')
-      width: 24px
-      height: 24px
+    @include mixins.theme(dark)
+      -webkit-filter: invert(.8)
+      filter: invert(.8)
 
 .search
-  background: white
   font-size: 1.1rem
   position: absolute
   top: 8rem
@@ -85,6 +96,13 @@
   border: colors.$black-80
   border-radius: 4px
   box-shadow: 0 0 0.6rem rgba(0, 0, 0, 0.4)
+  background: colors.$white
+
+  @include mixins.theme(light)
+    background: colors.$white
+
+  @include mixins.theme(dark)
+    background: colors.$med-grey
 
   a:hover
     text-decoration: none
@@ -93,6 +111,9 @@
     border-radius: 2px
     margin: 0 0.4rem 0.4rem 0.4rem
     padding: 0 0.4rem
+
+    @include mixins.theme(dark)
+      font-weight: 350
 
     &_selected
       background: colors.$black-10
@@ -109,6 +130,13 @@
     border: 0
     width: calc(100% - 0.8rem)
 
+    @include mixins.theme(light)
+      color: colors.$black
+
+    @include mixins.theme(dark)
+      color: colors.$white-80
+      font-weight: 350
+
     &:focus
       outline: none
 
@@ -119,10 +147,44 @@
   @include mixins.centered-flex()
   display: flex
 
+  &__item > a
+    font-size: 1rem
+    @include mixins.mq('desktop')
+      font-size: 1.25rem
 
   &__item
-    margin: 0 0.5rem
+    margin-left: 0.3rem
 
+    @include mixins.mq('tablet')
+      margin-left: 1.5rem
     @include mixins.mq('desktop')
-      margin: 0 1rem
-      
+      margin-left: 2rem
+
+
+.icon
+  width: 1rem
+  height: 1rem
+
+  @include mixins.mq('desktop')
+    width: 1.3rem
+    height: 1.3rem
+
+.label
+  display: flex
+  align-items: center
+  justify-content: center
+  width: 1.5rem
+  height: 1.5rem
+  border-radius: 50%
+  cursor: pointer
+  background-color: transparent
+  @include mixins.hover-desktop
+    transform: scale(1.2)
+
+  @include mixins.mq('tablet')
+    width: 1.8rem
+    height: 1.8rem
+
+  @include mixins.mq('desktop')
+    width: 2.5rem
+    height: 2.5rem

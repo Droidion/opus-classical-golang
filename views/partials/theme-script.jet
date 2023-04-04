@@ -1,0 +1,15 @@
+<script>
+  let currentTheme = "light";
+  const prevStoredTheme = localStorage.getItem("theme");
+  const isSystemColorThemeDark = window.matchMedia(
+    "(prefers-color-scheme: dark)"
+  ).matches;
+  const isPrevStoredDark = Boolean(prevStoredTheme && prevStoredTheme === "dark");
+  if (isPrevStoredDark || (!prevStoredTheme && isSystemColorThemeDark)) {
+    currentTheme = "dark";
+  }
+  document.documentElement.dataset.theme = currentTheme;
+  if (!prevStoredTheme) {
+    localStorage.setItem("theme", currentTheme);
+  }
+</script>

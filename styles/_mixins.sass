@@ -8,7 +8,12 @@
   align-items: center
   display: flex
 
-$breakpoints: ("desktop": 1300px)
+@mixin hover-desktop()
+  @media(hover: hover)
+    &:hover
+      @content
+
+$breakpoints: ("desktop": 1300px, "tablet": 768px)
 
 @mixin mq($width, $type: min)
   @if map_has_key($breakpoints, $width)
@@ -16,4 +21,12 @@ $breakpoints: ("desktop": 1300px)
     @if $type == max
       $width: $width - 1px
     @media only screen and (#{$type}-width: $width)
+      @content
+
+@mixin theme($theme-name, $breakpoint: "")
+  @at-root #{selector-nest(":root[data-theme=#{$theme-name}]", &)}
+    @if $breakpoint != ""
+      @include mq($breakpoint)
+        @content
+    @else
       @content

@@ -1,0 +1,35 @@
+@use 'colors'
+@use 'mixins'
+
+.toggle-switch
+  display: flex
+
+  &__input
+    opacity: 0
+    width: 0
+    height: 0
+    pointer-events: none
+
+  &__label
+    overflow: hidden
+
+    @include mixins.theme(light)
+      filter: invert(30%) sepia(40%) saturate(1532%) hue-rotate(12deg) brightness(98%) contrast(98%) // colors.$cinnamon
+
+    @include mixins.theme(dark)
+      filter: invert(73%) sepia(16%) saturate(822%) hue-rotate(350deg) brightness(91%) contrast(85%) // colors.$rose-gold
+
+  &__icon
+    &:first-child
+      @include mixins.theme(light)
+        display: none
+      @include mixins.theme(dark)
+        display: flex
+    &:last-child
+      @include mixins.theme(light)
+        display: flex
+      @include mixins.theme(dark)
+        display: none
+
+.d-none
+  display: none

@@ -4,6 +4,7 @@
 @use 'footer'
 @use 'general'
 @use 'blocks'
+@use 'theme-switch'
 @use 'mixins'
 
 html
@@ -16,10 +17,24 @@ html
 body
   display: grid
   justify-items: center
-  color: colors.$black
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen-Sans, Ubuntu, Cantarell, 'Helvetica Neue', sans-serif
   grid-template-rows: auto 1fr auto
   grid-template-areas: 'header' 'main' 'footer'
+  color: colors.$black
+  background-color: colors.$white
+
+  @include mixins.theme(light)
+    color: colors.$black
+    background-color: colors.$white
+
+  @include mixins.theme(dark)
+    color: colors.$white-80
+    background-color: colors.$soft-black
+
+body img
+  @include mixins.theme(dark)
+    filter: brightness(.8) contrast(1.2)
+
 
 h1, h2
   font-family: Cambria, Georgia, Times, 'Times New Roman', serif
@@ -39,6 +54,13 @@ h1
 h2
   font-size: 1.4rem
   margin-top: 1rem
+  color: colors.$black
+
+  @include mixins.theme(light)
+    color: colors.$cinnamon
+
+  @include mixins.theme(dark)
+    color: colors.$rose-gold
 
 a
   color: inherit
@@ -48,23 +70,21 @@ a
     text-decoration: underline
 
 hr
-  background-color: colors.$black-20
   border: 0
   height: 1px
   margin: 0.2rem 0
+  background-color: colors.$black-20
+
+  @include mixins.theme(light)
+    background-color: colors.$cinnamon
+
+  @include mixins.theme(dark)
+    background-color: colors.$rose-gold
 
 p
   margin-top: 1rem
-  
-.footer-logo
-  height: 2rem
-  width: 3rem
-  
-.buy-coffee-button
-  height: 2rem
 
 .vertical-separator
-  background-color: colors.$black-20
   bottom: -0.15em
   display: inline-block
   height: 1em
@@ -72,6 +92,36 @@ p
   position: relative
   width: 1px
   z-index: -1
+  background-color: colors.$black-20
+
+  @include mixins.theme(light)
+    background-color: colors.$black-20
+
+  @include mixins.theme(dark)
+    background-color: colors.$white-20
+
+
+.wrap-404
+  display: flex
+  justify-content: center
+  align-items: center
+  flex-grow: 1
 
 .pic-404
   margin: 4rem auto
+  width: 22rem
+  height: 22rem
+
+  &__body
+    @include mixins.theme(light)
+      fill: colors.$white
+
+    @include mixins.theme(dark)
+      fill: colors.$white-80
+
+  &__digits
+    @include mixins.theme(light)
+      fill: colors.$cinnamon
+
+    @include mixins.theme(dark)
+      fill: colors.$rose-gold
