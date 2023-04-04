@@ -62,6 +62,7 @@ const trackColorThemeChange = ({ target }: Event): void => {
  * cb triggered when user changes system color scheme
  */
 const trackSystemColorModeChange = (
+  e: Event,
   switcher: HTMLElement,
   isSystemDarkModeOn: boolean
 ): void => {
@@ -114,7 +115,7 @@ const init = () => {
     themeSwitcher.addEventListener("change", trackColorThemeChange);
 
     colorModeMediaQuery.addEventListener("change", (e) => {
-      trackSystemColorModeChange(themeSwitcher, colorModeMediaQuery.matches);
+      trackSystemColorModeChange(e, themeSwitcher, colorModeMediaQuery.matches);
     });
 
     const currentTheme = defineColorTheme(colorModeMediaQuery.matches);

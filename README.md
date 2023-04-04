@@ -71,6 +71,12 @@ Download new versions:
 
 - `$ go test ./... -cover`
 
+# Scripts Linting
+
+Set up IDE to run eslint only, do not run prettier, because prettier is already set up as eslint rules.
+
+- `$ pnpm run lint`
+
 # Deploy
 
 Opus Classical uses [render.com](https://render.com) for hosting. `main` branch automatically deploys to https://opusclassical.net
