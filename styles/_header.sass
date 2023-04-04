@@ -34,10 +34,12 @@
   &__logo
     height: 36px
     width: 36px
-    color: inherit
+
+    @include mixins.theme(light)
+      filter: invert(17%) sepia(45%) saturate(0%) hue-rotate(278deg) brightness(100%) contrast(99%) //colors.$black
 
     @include mixins.theme(dark)
-      filter: invert(1)
+      filter: invert(.8)
 
     @include mixins.mq('desktop')
       height: 72px
@@ -81,8 +83,6 @@
   cursor: pointer
 
   img
-    @include mixins.theme(light)
-      color: inherit
     @include mixins.theme(dark)
       -webkit-filter: invert(.8)
       filter: invert(.8)
