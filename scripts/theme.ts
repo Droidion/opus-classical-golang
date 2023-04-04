@@ -83,25 +83,6 @@ const showIconLabel = (label: HTMLLabelElement | null): void => {
 };
 
 /**
- * defines current color theme in the following priority order:
- * 1. prev stored color theme, 2. system color scheme, 3. theme light;
- */
-const defineColorTheme = (isSystemColorThemeDark: boolean): string => {
-  let currentTheme = ColorThemes.Light;
-
-  const prevStoredTheme = getStoredColorTheme();
-  const isPrevStoredDark = Boolean(
-    prevStoredTheme && prevStoredTheme === ColorThemes.Dark
-  );
-
-  if (isPrevStoredDark || (!prevStoredTheme && isSystemColorThemeDark)) {
-    currentTheme = ColorThemes.Dark;
-  }
-
-  return currentTheme;
-};
-
-/**
  * defines color theme and checkbox state;
  * adds event listener for tracking theme switch and system color scheme change;
  * makes theme switcher label visible
@@ -118,13 +99,11 @@ const init = () => {
       trackSystemColorModeChange(e, themeSwitcher, colorModeMediaQuery.matches);
     });
 
-    const currentTheme = defineColorTheme(colorModeMediaQuery.matches);
+    const currentTheme = getStoredColorTheme();
 
     if (currentTheme === ColorThemes.Dark) {
       toggleThemeSwitcherState(themeSwitcher, true);
     }
-
-    setColorTheme(currentTheme);
     showIconLabel(document.querySelector(".toggle-switch__label"));
   }
 };

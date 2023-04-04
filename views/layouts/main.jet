@@ -21,12 +21,9 @@
     <script src="/static/scripts/main.js?{{ Shared.appRunId }}" type="module" defer></script>
 </head>
 <body>
-  <script>
-    const theme = localStorage.getItem("theme") || "light";
-    document.documentElement.dataset.theme = theme;
-  </script>
-{{ include "../partials/header" }}
-<main class="main" role="main">{{ embed() }}</main>
-{{ include "../partials/footer" }}
+    {{ include "../partials/theme-script" }}
+    {{ include "../partials/header" }}
+    <main class="main" role="main">{{ embed() }}</main>
+    {{ include "../partials/footer" }}
 </body>
 </html>
