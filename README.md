@@ -26,7 +26,7 @@ DATABASE_CONNECTION_STRING=postgres://localhost:5432/opusclassical
 # URI where covers reside.
 COVERS_URI=https://opusclassical.zunh.nl-ams1.upcloudobjects.com/
 # Content Security Policy HTTP header.
-CSP="default-src 'none'; manifest-src 'self'; connect-src 'self' https://analytics.umami.is; script-src 'self' https://analytics.umami.is; style-src 'self'; img-src 'self' https://opusclassical.zunh.nl-ams1.upcloudobjects.com"
+CSP="default-src 'none'; manifest-src 'self'; connect-src 'self' https://analytics.umami.is; script-src 'self' 'sha256-xLdVGiTIFOZ8NKyolSFVkSMoa8kH5I7GjV1Se4PuSTQ=' https://analytics.umami.is; style-src 'self'; img-src 'self' https://opusclassical.zunh.nl-ams1.upcloudobjects.com"
 # URI for submitting client-side statustics with Umami.
 UMAMI_URI=
 # Website ID for submitting client-side statustics with Umami.
