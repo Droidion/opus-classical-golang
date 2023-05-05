@@ -21,6 +21,10 @@ jobs:
         with:
           persist-credentials: false
           fetch-depth: 0
+      - name: Set up Node
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18.x
       - name: Set up Go
         uses: actions/setup-go@v3
         with:
@@ -31,7 +35,13 @@ jobs:
           key: ${{ runner.os }}-go-${{ hashFiles('**/go.sum') }}
           restore-keys: |
             ${{ runner.os }}-go-
-      - name: Build
+      - name: Go Build
         run: go build -v ./...
-      - name: Test
+      - name: Go Test
         run: go test -v ./... -race -coverprofile=coverage.txt -covermode=atomic
+      - name: Node Lint
+        run: npm run lint
+      - name: Styles Lint
+        run: npm run stylelint
+      - name: Node Build
+        run: npm run build

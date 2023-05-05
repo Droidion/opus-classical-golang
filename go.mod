@@ -7,12 +7,12 @@ require (
 	github.com/doug-martin/goqu/v9 v9.18.0
 	github.com/georgysavva/scany/v2 v2.0.0
 	github.com/getsentry/sentry-go v0.20.0
-	github.com/gofiber/fiber/v2 v2.43.0
-	github.com/gofiber/helmet/v2 v2.2.25
-	github.com/gofiber/template v1.8.0
+	github.com/gofiber/fiber/v2 v2.44.0
+	github.com/gofiber/helmet/v2 v2.2.26
+	github.com/gofiber/template v1.8.1
 	github.com/jackc/pgx/v5 v5.3.1
 	github.com/rotisserie/eris v0.5.4
-	github.com/rs/zerolog v1.29.0
+	github.com/rs/zerolog v1.29.1
 	github.com/spf13/viper v1.15.0
 	github.com/stretchr/testify v1.8.2
 )
@@ -32,7 +32,7 @@ require (
 	github.com/lib/pq v1.10.2 // indirect
 	github.com/magiconair/properties v1.8.7 // indirect
 	github.com/mattn/go-colorable v0.1.13 // indirect
-	github.com/mattn/go-isatty v0.0.17 // indirect
+	github.com/mattn/go-isatty v0.0.18 // indirect
 	github.com/mattn/go-runewidth v0.0.14 // indirect
 	github.com/mitchellh/mapstructure v1.5.0 // indirect
 	github.com/pelletier/go-toml/v2 v2.0.6 // indirect
@@ -53,7 +53,7 @@ require (
 	github.com/valyala/tcplisten v1.0.0 // indirect
 	golang.org/x/crypto v0.7.0 // indirect
 	golang.org/x/sync v0.1.0 // indirect
-	golang.org/x/sys v0.6.0 // indirect
+	golang.org/x/sys v0.7.0 // indirect
 	golang.org/x/text v0.8.0 // indirect
 	gopkg.in/ini.v1 v1.67.0 // indirect
 	gopkg.in/yaml.v3 v3.0.1 // indirect
