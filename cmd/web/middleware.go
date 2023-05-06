@@ -24,6 +24,7 @@ func (app *application) addSecurity(c *fiber.Ctx) error {
 	c.Set("Cross-Origin-Opener-Policy", "same-origin")
 	c.Set(fiber.HeaderContentSecurityPolicy, app.config.Csp)
 	c.Set(fiber.HeaderPermissionsPolicy, "microphone=(), camera=()")
+	c.Set("Cross-Origin-Embedder-Policy", "unsafe-none")
 	return c.Next()
 }
 
