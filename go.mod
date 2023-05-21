@@ -6,15 +6,15 @@ require (
 	github.com/dchest/uniuri v1.2.0
 	github.com/doug-martin/goqu/v9 v9.18.0
 	github.com/georgysavva/scany/v2 v2.0.0
-	github.com/getsentry/sentry-go v0.20.0
-	github.com/gofiber/fiber/v2 v2.44.0
+	github.com/getsentry/sentry-go v0.21.0
+	github.com/gofiber/fiber/v2 v2.46.0
 	github.com/gofiber/helmet/v2 v2.2.26
 	github.com/gofiber/template v1.8.1
 	github.com/jackc/pgx/v5 v5.3.1
 	github.com/rotisserie/eris v0.5.4
 	github.com/rs/zerolog v1.29.1
 	github.com/spf13/viper v1.15.0
-	github.com/stretchr/testify v1.8.2
+	github.com/stretchr/testify v1.8.3
 )
 
 require (
