@@ -58,7 +58,7 @@ Alternatively, have Docker installed and run with `$ docker compose up`.
 Look for new versions for:
 
 - `$ pnpm outdated`.
-- `$ go list -u -m -json all | go-mod-outdated -direct` (need [go-mod-outdated](https://github.com/psampaz/go-mod-outdated) installed).
+- `$ go list -u -m -json all | $HOME/go/bin/go-mod-outdated -direct` (need [go-mod-outdated](https://github.com/psampaz/go-mod-outdated) installed).
 
 Update `package.json` and `go.mod` respectively.
 
